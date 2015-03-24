@@ -33,7 +33,7 @@ Basic Syntax:
 	service=[Service]
 	|user=[User]
 	|show=[Comma Delimited List of Items to Show]
-	|template=[Template to User]
+	|template=[Template to Use]
 	}}
 
 ####Attributes for #sprite Tag
