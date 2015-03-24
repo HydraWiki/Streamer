@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": ["Alexia E. Smith"]
+	},
+	"streamer_description": "Display information about a streamer from various streaming services.",
+	"error_streamer_missingparams": "Streamer is missing a required parameter."
+}
