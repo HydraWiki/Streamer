@@ -43,7 +43,7 @@ Basic Syntax:
 | service               | **Required**: yes<br/>The file page containing the image to use.                                                                                                                              |
 | user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                                                                  |
 | show                  | **Required**: yes, **Options**: user, status, viewers, thumbnail<br/>Comma delimited list of items to display in the template.                                                                |
-| template              | **Required**: no, **Default**: default, **Built In**: status, viewers, thumbnail, preivew<br/>Use a built in display template or specify a template to use.  Example: Template:Streamer_Thumb |
+| template              | **Required**: no, **Default**: default, **Built In**: status, viewers, thumbnail, preview<br/>Use a built in display template or specify a template to use.  Example: Template:Streamer_Thumb |
 
 ####Example
 
