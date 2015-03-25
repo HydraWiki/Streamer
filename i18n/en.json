@@ -5,5 +5,6 @@
 	"streamer_description": "Display information about a streamer from various streaming services.",
 	"streamer_error_bad_parameter": "Parameter \"$1\" is not recognized.",
 	"streamer_error_parameter_required": "Parameter \"$1\" is required to be supplied.",
-	"streamer_error_invalid_option": "The option specified, \"$2\", for parameter \"$1\" is not a valid option for that parameter."
+	"streamer_error_invalid_option": "The option specified, \"$2\", for parameter \"$1\" is not a valid option for that parameter.",
+	"streamer_error_invalid_user": "The streaming service \"$1\" could not find the user \"$2\" and/or returned an error."
 }

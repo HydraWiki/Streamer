@@ -37,6 +37,8 @@ $wgExtensionMessagesFiles['StreamerMagic']		= "{$extDir}/Streamer.i18n.magic.php
 $wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
 
 $wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
+$wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php";
+$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 
 $wgHooks['ParserFirstCallInit'][]				= 'StreamerHooks::onParserFirstCallInit';
 

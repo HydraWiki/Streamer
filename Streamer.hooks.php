@@ -76,24 +76,38 @@ class StreamerHooks {
 			$rawParameterOptions[] = trim($frame->expand($argument));
 		}
 		$parameters = self::cleanAndSetupParameters($rawParameterOptions);
-		var_dump($parameters);
 
 		/************************************/
 		/* Error Checking                   */
 		/************************************/
+		if (self::$errors === false) {
+			$streamer = ApiStreamerBase::newFromService($parameters['service']);
+			$userGood = $streamer->setUser($parameters['user']);
+
+			if (!$userGood) {
+				self::setError('streamer_error_invalid_user', [$parameters['service'], $parameters['user']]);
+			} else {
+				/************************************/
+				/* HMTL Generation                  */
+				/************************************/
+				var_dump($streamer->getOnline());
+				var_dump($streamer->getViewers());
+				var_dump($streamer->getDoing());
+				var_dump($streamer->getName());
+				var_dump($streamer->getStatus());
+				var_dump($streamer->getLifetimeViews());
+				var_dump($streamer->getLogo());
+				var_dump($streamer->getThumbnail());
+				$parser->getOutput()->addModuleStyles(['ext.streamer']);
+			}
+		}
+
 		if (self::$errors !== false) {
 			$html = "
 			<div class='errorbox'>
 				<strong>Streamer ".STREAMER_VERSION."</strong><br/>
 				".implode("<br/>\n", self::$errors)."
 			</div>";
-		} else {
-			/************************************/
-			/* HMTL Generation                  */
-			/************************************/
-
-
-			$parser->getOutput()->addModuleStyles(['ext.streamer']);
 		}
 
 		return [
