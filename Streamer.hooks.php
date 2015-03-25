@@ -90,14 +90,19 @@ class StreamerHooks {
 				/************************************/
 				/* HMTL Generation                  */
 				/************************************/
-				var_dump($streamer->getOnline());
-				var_dump($streamer->getViewers());
-				var_dump($streamer->getDoing());
-				var_dump($streamer->getName());
-				var_dump($streamer->getStatus());
-				var_dump($streamer->getLifetimeViews());
-				var_dump($streamer->getLogo());
-				var_dump($streamer->getThumbnail());
+				$variables = [
+					'%ONLINE%'			=> $streamer->getOnline(),
+					'%NAME%'			=> $streamer->getName(),
+					'%VIEWERS%'			=> $streamer->getViewers(),
+					'%DOING%'			=> $streamer->getDoing(),
+					'%STATUS%'			=> $streamer->getStatus(),
+					'%LIFETIMEVIEWS%'	=> $streamer->getLifetimeViews(),
+					'%LOGO%'			=> $streamer->getLogo(),
+					'%THUMBNAIL%'		=> $streamer->getThumbnail()
+				];
+
+				$html = self::getTemplateWithReplacements($parameters['template'], $variables);
+
 				$parser->getOutput()->addModuleStyles(['ext.streamer']);
 			}
 		}
@@ -163,6 +168,26 @@ class StreamerHooks {
 		}
 
 		return $cleanParameterOptions;
+	}
+
+	/**
+	 * Return a parsed template with variables replaced.
+	 *
+	 * @access	private
+	 * @param	string	Template Name - Either a built in template or a namespaced template.
+	 * @param	array	Replacement Variables
+	 * @return	string	HTML
+	 */
+	static private function getTemplateWithReplacements($template, $variables) {
+		$rawTemplate = StreamerTemplate::get($template);
+
+		if ($rawTemplate !== false) {
+			foreach ($variables as $variable => $replacement) {
+				$rawTemplate = str_replace($variable, $replacement, $rawTemplate);
+			}
+		}
+
+		return $rawTemplate;
 	}
 
 	/**
