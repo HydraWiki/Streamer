@@ -1,14 +1,29 @@
-div.tcenter.streamer, div.streamer.ev_center {
-	margin-left: auto;
-	margin-right: auto;
+.stream {
+	width: 180px;
 }
 
-div.streamer.ev_left {
-	clear: left;
+.stream .logo {
+	height: 160px;
+	margin: 10px;
+	text-align: center;
+	transform-style: preserve-3d;
+	vertical-align: middle;
+	width: 160px;
+}
+
+.stream .logo img {
+	margin: auto;
+	max-width: 160px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.stream .online {
 	float: left;
 }
 
-div.streamer.ev_right {
-	clear: right;
-	float: right;
+.stream .online > img {
+	display: inline-block;
+	width: 16px;
 }

@@ -27,13 +27,13 @@ class StreamerHooks {
 		],
 		'template' => [
 			'required'	=> false,
-			'default'	=> 'all',
+			'default'	=> 'block',
 			'built_in'	=> [
 				'status',
 				'thumbnail',
 				'viewers',
 				'link',
-				'all'
+				'block'
 			]
 		],
 	];
@@ -117,7 +117,7 @@ class StreamerHooks {
 
 		return [
 			$html,
-			'noparse' => true,
+			'noparse' => false,
 			'isHTML' => true
 		];
 	}
