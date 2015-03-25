@@ -19,31 +19,26 @@ Done! Navigate to "Special:Version" on your wiki to verify that the extension is
 
 #Usage
 
-![](documentation/BasicInterface.png)
-
 ##Tags
 
 ###\#streamer - Parser Tag
-The #streamer tag format accepts X and Y coordinate positions to select a section of the image from a traditional column and row format.
+The #streamer parser tag takes what service is being used, who the user is, and optionally how to display the information.
 
 Basic Syntax:
-
 
 	{{#streamer:
 	service=[Service]
 	|user=[User]
-	|show=[Comma Delimited List of Items to Show]
 	|template=[Template to Use]
 	}}
 
-####Attributes for #sprite Tag
+####Parameters for #sprite Tag
 
-|       Attribute       | Description                                                                                                                                                                                   |
-|----------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| service               | **Required**: yes<br/>The file page containing the image to use.                                                                                                                              |
-| user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                                                                  |
-| show                  | **Required**: yes, **Options**: user, status, viewers, thumbnail<br/>Comma delimited list of items to display in the template.                                                                |
-| template              | **Required**: no, **Default**: default, **Built In**: status, viewers, thumbnail, preview<br/>Use a built in display template or specify a template to use.  Example: Template:Streamer_Thumb |
+|       Parameter       | Description                                                                                                                                                |
+|----------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| service               | **Required**: yes<br/>The file page containing the image to use.                                                                                           |
+| user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                               |
+| template              | **Required**: no, **Default**: default, **Built In**: status, viewers, thumbnail, preview<br/>Use a built in template or specify a custom template to use. |
 
 ####Example
 
@@ -52,8 +47,7 @@ To display online/offline status of TwitchPlaysPokemon from the Twitch streaming
 	{{#streamer:
 	service=Twitch
 	|user=twitchplayspokemon
-	|show=status
-	|template=default
+	|template=status
 	}}
 
 ![](documentation/TwitchPlaysPokemonExample.png)

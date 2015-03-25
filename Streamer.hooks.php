@@ -10,6 +10,41 @@
  **/
 
 class StreamerHooks {
+	/**
+	 * Valid parameters.
+	 *
+	 * @var		array
+	 */
+	static private $parameters = [
+		'service' => [
+			'required'	=> true,
+			'default'	=> null,
+			'values'	=> ['twitch']
+		],
+		'user' => [
+			'required'	=> true,
+			'default'	=> null
+		],
+		'template' => [
+			'required'	=> false,
+			'default'	=> 'all',
+			'built_in'	=> [
+				'status',
+				'thumbnail',
+				'viewers',
+				'link',
+				'all'
+			]
+		],
+	];
+
+	/**
+	 * Any error messages that may have been triggerred.
+	 *
+	 * @var		array
+	 */
+	static private $errors = false;
+
     /**
      * Sets up this extension's parser functions.
      *
@@ -18,7 +53,7 @@ class StreamerHooks {
      * @return	boolean	true
      */
     static public function onParserFirstCallInit(Parser &$parser) {
-		$parser->setFunctionHook("streamer", "StreamerHooks::parseStreamerTag");
+		$parser->setFunctionHook("streamer", "StreamerHooks::parseStreamerTag", SFH_OBJECT_ARGS);
 
 		return true;
 	}
@@ -28,32 +63,103 @@ class StreamerHooks {
 	 *
 	 * @access	public
 	 * @param	object	Parser
-	 * @param	string	Which online service the streamer is using.
-	 * @param	string	User Identifier for the streamer.
+	 * @param	object	PPFrame
+	 * @param	array	Arguments
 	 * @return	array	Generated Output
 	 */
-	static public function parseStreamerTag($parser, $service = null, $streamer = null) {
+	static public function parseStreamerTag(Parser &$parser, PPFrame $frame, $arguments) {
 		/************************************/
 		/* Clean Parameters                 */
 		/************************************/
-
+		$rawParameterOptions = [];
+		foreach ($arguments as $argument) {
+			$rawParameterOptions[] = trim($frame->expand($argument));
+		}
+		$parameters = self::cleanAndSetupParameters($rawParameterOptions);
+		var_dump($parameters);
 
 		/************************************/
 		/* Error Checking                   */
 		/************************************/
+		if (self::$errors !== false) {
+			$html = "
+			<div class='errorbox'>
+				<strong>Streamer ".STREAMER_VERSION."</strong><br/>
+				".implode("<br/>\n", self::$errors)."
+			</div>";
+		} else {
+			/************************************/
+			/* HMTL Generation                  */
+			/************************************/
 
 
-		/************************************/
-		/* HMTL Generation                  */
-		/************************************/
-
-
-		$parser->getOutput()->addModuleStyles(['ext.streamer']);
+			$parser->getOutput()->addModuleStyles(['ext.streamer']);
+		}
 
 		return [
 			$html,
 			'noparse' => true,
 			'isHTML' => true
 		];
+	}
+
+	/**
+	 * Clean user supplied parameters and setup defaults.
+	 *
+	 * @access	private
+	 * @param	array	Raw strings of 'parameter=option'.
+	 * @return	array	Safe Parameter => Option key value pairs.
+	 */
+	static private function cleanAndSetupParameters($rawParameterOptions) {
+		//Check user supplied parameters.
+		foreach ($rawParameterOptions as $raw) {
+			$equals = strpos($raw, '=');
+			if ($equals === false || $equals === 0 || $equals === strlen($raw) - 1) {
+				continue;
+			}
+
+			list($parameter, $option) = explode('=', $raw);
+			$parameter = trim($parameter);
+			$option = trim($option);
+
+			if (isset(self::$parameters[$parameter])) {
+				if (is_array(self::$parameters[$parameter]['values'])) {
+					if (!in_array($option, self::$parameters[$parameter]['values'])) {
+						//Throw an error.
+						self::setError('streamer_error_invalid_option', [$parameter, $option]);
+					} else {
+						$cleanParameterOptions[$parameter] = $option;
+					}
+				} else {
+					$cleanParameterOptions[$parameter] = $option;
+				}
+			} else {
+				self::setError('streamer_error_bad_parameter', [$parameter]);
+			}
+		}
+
+		foreach (self::$parameters as $parameter => $parameterData) {
+			if ($parameterData['required'] && !array_key_exists($parameter, $cleanParameterOptions)) {
+				self::setError('streamer_error_parameter_required', [$parameter]);
+			}
+			//Assign the default if not supplied by the user and a default exists.
+			if (!$parameterData['required'] && !array_key_exists($parameter, $cleanParameterOptions) && $parameterData['default'] !== null) {
+				$cleanParameterOptions[$parameter] = $parameterData['default'];
+			}
+		}
+
+		return $cleanParameterOptions;
+	}
+
+	/**
+	 * Set a non-fatal error to be returned to the end user later.
+	 *
+	 * @access	private
+	 * @param	string	Message language string.
+	 * @param	array	Message replacements.
+	 * @return	void
+	 */
+	static private function setError($message, $replacements) {
+		self::$errors[] = wfMessage($message, $replacements)->escaped();
 	}
 }

@@ -16,12 +16,14 @@ if (!defined('MEDIAWIKI')) {
 /******************************************/
 /* Credits                                */
 /******************************************/
+define('STREAMER_VERSION', '0.1.0');
+
 $wgExtensionCredits['parserhook'][] = [
 	'path'				=> __FILE__,
 	'name'				=> 'Streamer',
 	'author'			=> ['Wiki Platform Team', 'Curse Inc.', 'Alexia E. Smith'],
 	'url'				=> 'http://www.mediawiki.org/wiki/Extension:Streamer',
-	'version'			=> '0.1.0',
+	'version'			=> STREAMER_VERSION,
 	'descriptionmsg'	=> 'streamer_description'
 ];
 
