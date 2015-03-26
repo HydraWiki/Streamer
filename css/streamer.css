@@ -1,15 +1,17 @@
 .stream .logo {
-	height: 160px;
-	margin: 10px;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
+	height: 180px;
+	margin: 5px 0;
 	text-align: center;
 	transform-style: preserve-3d;
 	vertical-align: middle;
-	width: 160px;
+	width: 180px;
 }
 
 .stream .logo img {
+	display: block;
 	margin: auto;
-	max-width: 160px;
+	max-width: 180px;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
@@ -67,6 +69,8 @@
 /* Block Template                */
 /*********************************/
 .stream.block {
+	display: inline-block;
+	margin: 0 10px;
 	position: relative;
 	width: 180px;
 }

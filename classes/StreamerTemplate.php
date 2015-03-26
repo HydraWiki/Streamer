@@ -26,20 +26,34 @@ class StreamerTemplate {
 	}
 
 	/**
-	 * Function Documentation
+	 * Built In 'block' template.
 	 *
 	 * @access	public
-	 * @return	void
+	 * @return	string	HTML
 	 */
 	static public function _block() {
-		global $wgServer;
-		$imageBase = wfExpandUrl("extensions/Streamer/images/", PROTO_CURRENT);
 		$html = "
 			<div class='stream block'>
 				<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
 				<div class='stream_info'><div class='name'>%NAME%</div><div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div></div>
 			</div>";
 
-	return $html;
+		return $html;
+	}
+
+	/**
+	 * Built In 'viewers' template.
+	 *
+	 * @access	public
+	 * @return	string	HTML
+	 */
+	static public function _viewers() {
+		$html = "
+			<div class='stream block'>
+				<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
+				<div class='stream_info'><div class='name'>%NAME%</div><div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div></div>
+			</div>";
+
+		return $html;
 	}
 }

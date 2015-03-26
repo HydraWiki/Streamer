@@ -11,13 +11,6 @@
 
 class ApiTwitch extends ApiStreamerBase {
 	/**
-	 * User Identifier
-	 *
-	 * @var		string
-	 */
-	private $user = null;
-
-	/**
 	 * API Entry Point
 	 *
 	 * @var		string
@@ -31,7 +24,8 @@ class ApiTwitch extends ApiStreamerBase {
 	 * @return	void
 	 */
 	public function __construct() {
-		# code...
+		$this->service = 'twitch';
+		parent::__construct();
 	}
 
 	/**
@@ -48,30 +42,41 @@ class ApiTwitch extends ApiStreamerBase {
 		}
 		$this->user = $user;
 
+		if ($this->loadCache()) {
+			return true;
+		}
+
+		$rawJson = Http::request('GET', $this->getFullRequestUrl(['channels', $this->user]), $this->getRequestOptions());
+
+		$json = $this->parseRawJson($rawJson);
+
+		if ($json === false) {
+			return false;
+		}
+
+		if (isset($json['display_name'])) {
+			$this->setName($json['display_name']);
+			$this->setLogo($json['logo']);
+			$this->setDoing($json['game']);
+			$this->setLifetimeViews($json['views']);
+			$this->setChannelUrl($json['url']);
+			$this->setStatus($json['status']);
+			$this->setFollowers($json['followers']);
+		}
+
 		$rawJson = Http::request('GET', $this->getFullRequestUrl(['streams', $this->user]), $this->getRequestOptions());
 
-		if ($rawJson === false) {
-			return false;
-		}
-
-		$json = @json_decode($rawJson, true);
-
-		if (!is_array($json)) {
-			return false;
-		}
+		$json = $this->parseRawJson($rawJson);
 
 		if (array_key_exists('stream', $json) && $json['stream'] !== null) {
-			$this->setDoing($json['stream']['game']);
 			$this->setViewers($json['stream']['viewers']);
-			$this->setLogo($json['stream']['channel']['logo']);
 			$this->setThumbnail($json['stream']['preview']['large']);
-			$this->setStatus($json['stream']['channel']['status']);
-			$this->setName($json['stream']['channel']['display_name']);
-			$this->setLifetimeViews($json['stream']['channel']['views']);
 			$this->setOnline(true);
 		} else {
 			$this->setOnline(false);
 		}
+
+		$this->updateCache();
 
 		return true;
 	}

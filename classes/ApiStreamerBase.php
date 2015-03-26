@@ -18,60 +18,39 @@ abstract class ApiStreamerBase {
 	private $userAgent = null;
 
 	/**
+	 * Service Identifier
+	 *
+	 * @var		string
+	 */
+	protected $service = null;
+
+	/**
 	 * User Identifier
 	 *
 	 * @var		string
 	 */
-	private $user = null;
+	protected $user = null;
 
 	/**
-	 * Streamer Name
+	 * Streamer Data
+	 *
+	 * @var		array
+	 */
+	private $data = [];
+
+	/**
+	 * Mediawiki Cache Object
+	 *
+	 * @var		object
+	 */
+	private $cache = null;
+
+	/**
+	 * Cache Key
 	 *
 	 * @var		string
 	 */
-	private $name = null;
-
-	/**
-	 * Current Live Stream Viewers
-	 *
-	 * @var		integer
-	 */
-	private $viewers = 0;
-
-	/**
-	 * Stream Logo
-	 *
-	 * @var		string
-	 */
-	private $logo = null;
-
-	/**
-	 * Stream Thumbnail
-	 *
-	 * @var		string
-	 */
-	private $thumbnail = null;
-
-	/**
-	 * Stream Status Message
-	 *
-	 * @var		string
-	 */
-	private $status = null;
-
-	/**
-	 * Stream Online/Offline Status
-	 *
-	 * @var		boolean
-	 */
-	private $online = false;
-
-	/**
-	 * Lifetime Views(Previous, current, and live.)
-	 *
-	 * @var		integer
-	 */
-	private $lifetimeViews = 0;
+	private $cacheKey = null;
 
 	/**
 	 * Main Constructor
@@ -81,6 +60,8 @@ abstract class ApiStreamerBase {
 	 */
 	public function __construct() {
 		global $wgServer, $wgVersion;
+
+		$this->cache = wfGetCache(CACHE_ANYTHING);
 
 		$this->userAgent = $wgServer." (MediaWiki/{$wgVersion}; Streamer ".STREAMER_VERSION.")";
 	}
@@ -142,7 +123,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setName($name) {
-		$this->name = $name;
+		$this->data['name'] = $name;
 	}
 
 	/**
@@ -152,7 +133,7 @@ abstract class ApiStreamerBase {
 	 * @return	string	Streamer Name
 	 */
 	public function getName() {
-		return $this->name;
+		return $this->data['name'];
 	}
 
 	/**
@@ -163,7 +144,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setViewers($viewers) {
-		$this->viewers = intval($viewers);
+		$this->data['viewers'] = intval($viewers);
 	}
 
 	/**
@@ -173,7 +154,7 @@ abstract class ApiStreamerBase {
 	 * @return	integer	Current Live Viewers
 	 */
 	public function getViewers() {
-		return $this->viewers;
+		return $this->data['viewers'];
 	}
 
 	/**
@@ -184,7 +165,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setLogo($logo) {
-		$this->logo = $logo;
+		$this->data['logo'] = $logo;
 	}
 
 	/**
@@ -194,7 +175,7 @@ abstract class ApiStreamerBase {
 	 * @return	string	Fully qualified URL to the logo.
 	 */
 	public function getLogo() {
-		return $this->logo;
+		return $this->data['logo'];
 	}
 
 	/**
@@ -205,7 +186,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setThumbnail($thumbnail) {
-		$this->thumbnail = $thumbnail;
+		$this->data['thumbnail'] = $thumbnail;
 	}
 
 	/**
@@ -215,7 +196,7 @@ abstract class ApiStreamerBase {
 	 * @return	string	Fully qualified URL to the thumbnail.
 	 */
 	public function getThumbnail() {
-		return $this->thumbnail;
+		return $this->data['thumbnail'];
 	}
 
 	/**
@@ -226,7 +207,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setStatus($status) {
-		$this->status = $status;
+		$this->data['status'] = $status;
 	}
 
 	/**
@@ -236,7 +217,7 @@ abstract class ApiStreamerBase {
 	 * @return	string	Status Message
 	 */
 	public function getStatus() {
-		return $this->status;
+		return $this->data['status'];
 	}
 
 	/**
@@ -247,7 +228,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setOnline($online) {
-		$this->online = (bool) $online;
+		$this->data['online'] = (bool) $online;
 	}
 
 	/**
@@ -257,7 +238,7 @@ abstract class ApiStreamerBase {
 	 * @return	boolean	True, Online.  False, Offline
 	 */
 	public function getOnline() {
-		return $this->online;
+		return $this->data['online'];
 	}
 
 	/**
@@ -268,7 +249,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setLifetimeViews($lifetimeViews) {
-		$this->lifetimeViews = intval($lifetimeViews);
+		$this->data['lifetimeViews'] = intval($lifetimeViews);
 	}
 
 	/**
@@ -278,7 +259,28 @@ abstract class ApiStreamerBase {
 	 * @return	integer	Lifetime Views
 	 */
 	public function getLifetimeViews() {
-		return $this->lifetimeViews;
+		return $this->data['lifetimeViews'];
+	}
+
+	/**
+	 * Set the number of followers.
+	 *
+	 * @access	protected
+	 * @return	integer	Followers
+	 * @return	void
+	 */
+	protected function setFollowers($followers) {
+		$this->data['followers'] = intval($followers);
+	}
+
+	/**
+	 * Return the number of followers.
+	 *
+	 * @access	public
+	 * @return	integer	Followers
+	 */
+	public function getFollowers() {
+		return $this->data['followers'];
 	}
 
 	/**
@@ -289,7 +291,7 @@ abstract class ApiStreamerBase {
 	 * @return	void
 	 */
 	protected function setDoing($doing) {
-		$this->doing = $doing;
+		$this->data['doing'] = $doing;
 	}
 
 	/**
@@ -299,6 +301,87 @@ abstract class ApiStreamerBase {
 	 * @return	string	Currently Doing
 	 */
 	public function getDoing() {
-		return $this->doing;
+		return $this->data['doing'];
+	}
+
+	/**
+	 * Set channel URL.
+	 *
+	 * @access	protected
+	 * @return	string	Fully Qualified Channel URL
+	 * @return	void
+	 */
+	protected function setChannelUrl($channelUrl) {
+		$this->data['channelUrl'] = $channelUrl;
+	}
+
+	/**
+	 * Return the channel URL.
+	 *
+	 * @access	public
+	 * @return	string	Fully Qualified Channel URL
+	 */
+	public function getChannelUrl() {
+		return $this->data['channelUrl'];
+	}
+
+	/**
+	 * Possibly return parsed JSON data into an array.
+	 *
+	 * @access	protected
+	 * @return	mixed	Array, parsed JSON data.  False on error.
+	 */
+	protected function parseRawJson($rawJson) {
+		if ($rawJson === false) {
+			return false;
+		}
+
+		$json = @json_decode($rawJson, true);
+
+		if (!is_array($json)) {
+			return false;
+		}
+		return $json;
+	}
+
+	/**
+	 * Possibly load a cache of streamer information into the object.
+	 *
+	 * @access	public
+	 * @return	boolean	Success
+	 */
+	protected function loadCache() {
+		$this->setCacheKey();
+		$data = $this->cache->get($this->cacheKey);
+
+		if (is_string($data)) {
+			$data = $this->parseRawJson($data);
+			if (!empty($data['name'])) {
+				$this->data = $data;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Update cache of streamer information.
+	 *
+	 * @access	protected
+	 * @return	void
+	 */
+	protected function updateCache() {
+		$this->setCacheKey();
+		$this->cache->set($this->cacheKey, json_encode($this->data), 300);
+	}
+
+	/**
+	 * Function Documentation
+	 *
+	 * @access	protected
+	 * @return	void
+	 */
+	protected function setCacheKey() {
+		$this->cacheKey = wfMemcKey('streamer', $this->service, $this->user);
 	}
 }
