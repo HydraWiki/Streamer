@@ -37,7 +37,7 @@ class StreamerTemplate {
 		$html = "
 			<div class='stream'>
 				<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
-				<div class='online'><img src='{$imageBase}{{#ifeq:%ONLINE%|1|online|offline}}.png'/></div><div class='name'>%NAME%</div>
+				<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div><div class='name'>%NAME%</div>
 			</div>";
 
 	return $html;

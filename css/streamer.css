@@ -20,7 +20,43 @@
 }
 
 .stream .online {
+	background: linear-gradient(to bottom, #fbfbfb 0%, #f2f3f2 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+	color: #969696;
 	float: left;
+	font-family: sans-serif;
+	font-size: 12px;
+	height: 13px;
+	line-height: 14px;
+	padding: 3px 4.5px;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+
+.stream .online.live {
+	color: #282828;
+}
+
+.stream .online .dot::before {
+	background: none repeat scroll 0 0 #979797;
+	border-radius: 9px;
+	content: "";
+	display: inline-block;
+	float: left;
+	height: 9px;
+	margin: 2px 5px 2px 0;
+	width: 9px;
+}
+
+.stream .online.live .dot::before {
+	background: none repeat scroll 0 0 #fc0f1b;
+}
+
+.stream .online .dot {
+	display: inline;
+	height: 9px;
 }
 
 .stream .online > img {
