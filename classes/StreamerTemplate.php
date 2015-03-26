@@ -35,22 +35,21 @@ class StreamerTemplate {
 		$html = "
 			<div class='stream block'>
 				<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
-				<div class='stream_info'><div class='name'>%NAME%</div><div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div></div>
+				<div class='stream_info'><div class='name'><a href='%LINK%'>%NAME%</a></div><div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div></div>
 			</div>";
 
 		return $html;
 	}
 
 	/**
-	 * Built In 'viewers' template.
+	 * Built In 'live' template.
 	 *
 	 * @access	public
 	 * @return	string	HTML
 	 */
-	static public function _viewers() {
+	static public function _live() {
 		$html = "
-			<div class='stream block'>
-				<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
+			<div class='stream live'>
 				<div class='stream_info'><div class='name'>%NAME%</div><div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div></div>
 			</div>";
 

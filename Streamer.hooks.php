@@ -29,12 +29,17 @@ class StreamerHooks {
 			'required'	=> false,
 			'default'	=> 'block',
 			'built_in'	=> [
-				'status',
+				'block',
+				'live',
+				'mini-live',
 				'thumbnail',
 				'viewers',
-				'link',
-				'block'
+				'link'
 			]
+		],
+		'link' => [
+			'required'	=> false,
+			'default'	=> null
 		],
 	];
 
@@ -90,15 +95,28 @@ class StreamerHooks {
 				/************************************/
 				/* HMTL Generation                  */
 				/************************************/
+				if (isset($parameters['link'])) {
+					$link = $parameters['link'];
+				} else {
+					//@TODO: This.
+					//$link = StreamerInfo::getLink($parameters['service'], $parameters['user']);
+				}
+				if (!$link) {
+					//Fallback in case of no actual links.
+					$link = $streamer->getChannelUrl();
+				}
+
 				$variables = [
 					'%ONLINE%'			=> $streamer->getOnline(),
 					'%NAME%'			=> $streamer->getName(),
 					'%VIEWERS%'			=> $streamer->getViewers(),
 					'%DOING%'			=> $streamer->getDoing(),
 					'%STATUS%'			=> $streamer->getStatus(),
-					'%LIFETIMEVIEWS%'	=> $streamer->getLifetimeViews(),
+					'%LIFETIME_VIEWS%'	=> $streamer->getLifetimeViews(),
 					'%LOGO%'			=> $streamer->getLogo(),
-					'%THUMBNAIL%'		=> $streamer->getThumbnail()
+					'%THUMBNAIL%'		=> $streamer->getThumbnail(),
+					'%CHANNEL_URL%'		=> $streamer->getChannelUrl(),
+					'%LINK%'			=> $link
 				];
 
 				$html = self::getTemplateWithReplacements($parameters['template'], $variables);

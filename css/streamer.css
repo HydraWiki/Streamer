@@ -1,3 +1,8 @@
+.stream {
+	display: inline-block;
+	position: relative;
+}
+
 .stream .logo {
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
 	height: 180px;
@@ -15,6 +20,8 @@
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
 }
 
 .stream .online {
@@ -44,11 +51,12 @@
 	content: "";
 	display: inline-block;
 	height: 9px;
-	left: 5px;
+	left: 1px;
 	position: absolute;
-	top: 4px;
+	top: 1px;
 	width: 9px;
 }
+
 
 .stream .online.live .dot::before {
 	background: none repeat scroll 0 0 #fc0f1b;
@@ -58,6 +66,7 @@
 	display: inline;
 	height: 12px;
 	padding-left: 14px;
+	position: relative;
 }
 
 .stream .online > img {
@@ -69,21 +78,29 @@
 /* Block Template                */
 /*********************************/
 .stream.block {
-	display: inline-block;
 	margin: 0 10px;
-	position: relative;
 	width: 180px;
 }
 
-.stream.block .stream_info {
+/*********************************/
+/* Live Template                 */
+/*********************************/
+.stream.live {
+	margin: 0 10px;
+}
+
+/*********************************/
+/* Stream Info Flex Display      */
+/*********************************/
+.stream .stream_info {
 	display: flex;
 }
 
-.stream.block .online {
+.stream .stream_info .online {
 	flex: 0 1 auto;
 }
 
-.stream.block .name {
+.stream .stream_info .name {
 	align-self: auto;
 	flex: 1 1 auto;
 	order: 0;
