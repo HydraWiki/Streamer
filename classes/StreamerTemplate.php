@@ -22,6 +22,16 @@ class StreamerTemplate {
 			return self::$function();
 		}
 
+		$title = Title::newFromText($template);
+
+		if ($title->isKnown() && $title->getNamespace() == NS_TEMPLATE) {
+			$page = WikiPage::factory($title);
+			if ($page->exists()) {
+				$content = $page->getContent();
+				return $content->getNativeData();
+			}
+		}
+
 		return false;
 	}
 
