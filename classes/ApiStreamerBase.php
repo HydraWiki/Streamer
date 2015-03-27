@@ -154,7 +154,7 @@ abstract class ApiStreamerBase {
 	 * @return	integer	Current Live Viewers
 	 */
 	public function getViewers() {
-		return $this->data['viewers'];
+		return intval($this->data['viewers']);
 	}
 
 	/**
@@ -238,7 +238,7 @@ abstract class ApiStreamerBase {
 	 * @return	boolean	True, Online.  False, Offline
 	 */
 	public function getOnline() {
-		return $this->data['online'];
+		return (bool) $this->data['online'];
 	}
 
 	/**
@@ -259,7 +259,7 @@ abstract class ApiStreamerBase {
 	 * @return	integer	Lifetime Views
 	 */
 	public function getLifetimeViews() {
-		return $this->data['lifetimeViews'];
+		return intval($this->data['lifetimeViews']);
 	}
 
 	/**
@@ -280,7 +280,7 @@ abstract class ApiStreamerBase {
 	 * @return	integer	Followers
 	 */
 	public function getFollowers() {
-		return $this->data['followers'];
+		return intval($this->data['followers']);
 	}
 
 	/**

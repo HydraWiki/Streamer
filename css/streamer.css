@@ -24,16 +24,23 @@
 	-ms-transform: translateY(-50%);
 }
 
-.stream .online {
+/*********************************/
+/* Online Status Display         */
+/*********************************/
+.online {
+	align-content: center;
+	align-items: flex-start;
 	background: linear-gradient(to bottom, #fbfbfb 0%, #f2f3f2 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	border: 1px solid #d9d9d9;
 	border-radius: 2px;
 	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
 	color: #969696;
-	display: inline-block;
+	display: flex;
+	flex-flow: row nowrap;
 	font-family: sans-serif;
 	font-size: 12px;
 	height: 11px;
+	justify-content: flex-start;
 	line-height: 12px;
 	padding: 3px 4.5px;
 	position: relative;
@@ -41,37 +48,35 @@
 	vertical-align: middle;
 }
 
-.stream .online.live {
+.online.live {
 	color: #282828;
 }
 
-.stream .online .dot::before {
+.online.live .dot {
+	background: none repeat scroll 0 0 #fc0f1b;
+}
+
+.online .dot {
+	align-self: auto;
 	background: none repeat scroll 0 0 #979797;
 	border-radius: 9px;
 	content: "";
 	display: inline-block;
+	flex: 0 1 auto;
 	height: 9px;
-	left: 1px;
-	position: absolute;
-	top: 1px;
+	margin: 1px 0 0 1px;
+	order: 0;
 	width: 9px;
 }
 
-
-.stream .online.live .dot::before {
-	background: none repeat scroll 0 0 #fc0f1b;
-}
-
-.stream .online .dot {
-	display: inline;
-	height: 12px;
-	padding-left: 14px;
-	position: relative;
-}
-
-.stream .online > img {
+.online .text {
+	align-self: auto;
 	display: inline-block;
-	width: 16px;
+	flex: 1 1 auto;
+	height: 12px;
+	line-height: 13px;
+	margin-left: 5px;
+	order: 1;
 }
 
 /*********************************/
@@ -83,13 +88,6 @@
 }
 
 /*********************************/
-/* Live Template                 */
-/*********************************/
-.stream.live {
-	margin: 0 10px;
-}
-
-/*********************************/
 /* Stream Info Flex Display      */
 /*********************************/
 .stream .stream_info {
@@ -98,6 +96,7 @@
 
 .stream .stream_info .online {
 	flex: 0 1 auto;
+	margin-left: 5px;
 }
 
 .stream .stream_info .name {

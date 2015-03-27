@@ -34,11 +34,11 @@ Basic Syntax:
 
 ####Parameters for #sprite Tag
 
-|       Parameter       | Description                                                                                                                                                    |
-|----------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| service               | **Required**: yes<br/>The file page containing the image to use.                                                                                               |
-| user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                                   |
-| template              | **Required**: no, **Default**: block, **Built In**: live, mini-live, viewers, thumbnail, link<br/>Use a built in template or specify a custom template to use. |
+|       Parameter       | Description                                                                                                                                                   |
+|----------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| service               | **Required**: yes<br/>The file page containing the image to use.                                                                                              |
+| user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                                  |
+| template              | **Required**: no, **Default**: block, **Built In**: live, minilive, viewers, thumbnail, link<br/>Use a built in template or specify a custom template to use. |
 
 ####Example
 

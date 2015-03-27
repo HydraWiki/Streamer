@@ -31,7 +31,7 @@ class StreamerHooks {
 			'built_in'	=> [
 				'block',
 				'live',
-				'mini-live',
+				'minilive',
 				'thumbnail',
 				'viewers',
 				'link'
