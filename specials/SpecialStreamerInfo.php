@@ -47,10 +47,7 @@ class SpecialStreamerInfo extends SpecialPage {
 			return;
 		}
 
-		$this->mouse = mouseNest::getMouse();
-		$this->mouse->output->addTemplateFolder(STREAMER_EXT_DIR.'/templates');
-
-		$this->mouse->output->loadTemplate('streamerinfo');
+		$this->templates = new TemplateStreamerInfo();
 
 		$this->output->addModules('ext.streamer');
 
@@ -78,9 +75,9 @@ class SpecialStreamerInfo extends SpecialPage {
 		while ($row = $result->fetchRow()) {
 			$streamers[] = StreamerInfo::newFromRow($row);
 		}
-		var_dump($streamers);
+
 		$this->output->setPageTitle(wfMessage('streamer_info_page_title')->escaped());
-		$this->content = $this->mouse->output->streamerinfo->streamerInfoPage($streamers);
+		$this->content = $this->templates->streamerInfoPage($streamers);
 	}
 
 	/**

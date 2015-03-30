@@ -48,6 +48,7 @@ $wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 $wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
 $wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
+$wgAutoloadClasses['TemplateStreamerInfo']		= "{$extDir}/templates/TemplateStreamerInfo.php";
 
 $wgSpecialPages['StreamerInfo']					= 'SpecialStreamerInfo';
 

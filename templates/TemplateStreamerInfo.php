@@ -9,7 +9,7 @@
  *
  **/
 
-class skin_streamerinfo {
+class TemplateStreamerInfo {
 	/**
 	 * Output HTML
 	 *
