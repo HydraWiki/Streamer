@@ -17,7 +17,6 @@ class SpecialStreamerInfo extends SpecialPage {
 	 */
 	private $content;
 
-
 	/**
 	 * Main Constructor
 	 *
@@ -69,8 +68,17 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	void	[Outputs to screen]
 	 */
 	private function streamerInfoPage() {
+		$result = $this->DB->select(
+			['streamer'],
+			['*'],
+			[],
+			__METHOD__
+		);
 
-
+		while ($row = $result->fetchRow()) {
+			$streamers[] = StreamerInfo::newFromRow($row);
+		}
+		var_dump($streamers);
 		$this->output->setPageTitle(wfMessage('streamer_info_page_title')->escaped());
 		$this->content = $this->mouse->output->streamerinfo->streamerInfoPage($streamers);
 	}

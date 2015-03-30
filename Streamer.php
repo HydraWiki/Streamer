@@ -46,6 +46,12 @@ $wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
 $wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php";
 $wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
+$wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
+$wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
+
+$wgSpecialPages['StreamerInfo']					= 'SpecialStreamerInfo';
+
+$wgSpecialPageGroups['StreamerInfo']			= 'other';
 
 $wgHooks['ParserFirstCallInit'][]				= 'StreamerHooks::onParserFirstCallInit';
 $wgHooks['LoadExtensionSchemaUpdates'][]		= 'StreamerHooks::onLoadExtensionSchemaUpdates';
