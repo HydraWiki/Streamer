@@ -219,4 +219,17 @@ class StreamerHooks {
 	static private function setError($message, $replacements) {
 		self::$errors[] = wfMessage($message, $replacements)->escaped();
 	}
+
+	/**
+	 * Setups and Modifies Database Information
+	 *
+	 * @access	public
+	 * @param	object	DatabaseUpdater Object
+	 * @return	boolean	true
+	 */
+	static public function onLoadExtensionSchemaUpdates($updater = null) {
+		$updater->addExtensionUpdate(['addTable', 'streamer', STREAMER_EXT_DIR."/install/sql/streamer_table_streamer.sql", true]);
+
+		return true;
+	}
 }

@@ -32,6 +32,12 @@ $wgExtensionCredits['parserhook'][] = [
 /******************************************/
 $extDir = __DIR__;
 
+if (!defined('STREAMER_EXT_DIR')) {
+	define('STREAMER_EXT_DIR', $extDir);
+}
+
+$wgAvailableRights[] = 'edit_streamer_info';
+
 $wgExtensionMessagesFiles['Streamer']			= "{$extDir}/Streamer.i18n.php";
 $wgExtensionMessagesFiles['StreamerMagic']		= "{$extDir}/Streamer.i18n.magic.php";
 $wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
@@ -42,6 +48,7 @@ $wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 
 $wgHooks['ParserFirstCallInit'][]				= 'StreamerHooks::onParserFirstCallInit';
+$wgHooks['LoadExtensionSchemaUpdates'][]		= 'StreamerHooks::onLoadExtensionSchemaUpdates';
 
 $wgResourceModules['ext.streamer'] = [
 	'localBasePath'	=> __DIR__,
