@@ -10,5 +10,7 @@
 	"stream_online": "live",
 	"stream_offline": "offline",
 	"action-edit_streamer_info": "edit streamer information",
-	"streamerinfo": "Streamer Information"
+	"streamerinfo": "Streamer Information",
+	"service_0": "Unknown",
+	"service_1": "Twitch"
 }

@@ -25,7 +25,31 @@ class TemplateStreamerInfo {
 	 * @return	string	Built HTML
 	 */
 	public function streamerInfoPage($streamers) {
-		$HTML .= "";
+		$HTML .= "
+		<table class='wikitable'>
+			<thead>
+				<tr>
+					<th>Service</th>
+					<th>Streamer Name</th>
+					<th>Display Name</th>
+					<th>Page Title</th>
+					<th>Link Preview</th>
+				</tr>
+			</thead>
+			<tbody>";
+		foreach ($streamers as $streamer) {
+			$HTML .= "
+				<tr>
+					<td>".wfMessage("service_".$streamer->getService())->escaped()."</td>
+					<td>".$streamer->getRemoteName()."</td>
+					<td>".$streamer->getDisplayName()."</td>
+					<td>".($streamer->getPageTitle() ? $streamer->getPageTitle()->getPrefixedText() : '')."</td>
+					<td>".$streamer->getLink(true)."</td>
+				</tr>";
+		}
+		$HTML .= "
+			</tbody>
+		</table>";
 
 		return $HTML;
 	}

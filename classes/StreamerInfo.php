@@ -122,8 +122,8 @@ class StreamerInfo {
 	 */
 	static public function getServiceId($service) {
 		$service = strtolower($service);
-		if (array_key_exists($service, $serviceConstants)) {
-			return $serviceConstants[$service];
+		if (array_key_exists($service, self::$serviceConstants)) {
+			return self::$serviceConstants[$service];
 		}
 		return self::SERVICE_NULL;
 	}
@@ -140,8 +140,8 @@ class StreamerInfo {
 				['streamer'],
 				['*'],
 				[
-					'service'		=> $this->getService(),
-					'remote_name'	=> $this->getRemoteName()
+					'service'		=> $this->data['service'],
+					'remote_name'	=> $this->data['remote_name']
 				],
 				__METHOD__
 			);
@@ -152,7 +152,7 @@ class StreamerInfo {
 				$this->data = $row;
 				$title = Title::newFromDBkey($row['page_title']);
 				if ($title !== null) {
-					$streamerInfo->setPageTitle($title);
+					$this->setPageTitle($title);
 				} else {
 					$this->data['page_title'] = null;
 				}
@@ -239,6 +239,7 @@ class StreamerInfo {
 	 * @return	string	Display Name
 	 */
 	public function getDisplayName() {
+		$this->load();
 		return $this->data['display_name'];
 	}
 
@@ -260,6 +261,22 @@ class StreamerInfo {
 	 * @return	object	Title
 	 */
 	public function getPageTitle() {
+		$this->load();
 		return $this->data['page_title'];
+	}
+
+	/**
+	 * Return a title page link.
+	 *
+	 * @access	public
+	 * @return	string	Title string form ready for parsing or false on error.
+	 */
+	public function getLink() {
+		$link = false;
+		if ($this->getPageTitle() instanceOf Title) {
+			$link = $this->getPageTitle()->getFullURL();
+		}
+
+		return $link;
 	}
 }

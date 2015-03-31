@@ -95,11 +95,13 @@ class StreamerHooks {
 				/************************************/
 				/* HMTL Generation                  */
 				/************************************/
+				$streamerInfo = StreamerInfo::newFromServiceAndName($parameters['service'], $parameters['user']);
+				$displayName = $streamerInfo->getDisplayName();
+
 				if (isset($parameters['link'])) {
 					$link = $parameters['link'];
 				} else {
-					//@TODO: This.
-					//$link = StreamerInfo::getLink($parameters['service'], $parameters['user']);
+					$link = $streamerInfo->getLink();
 				}
 				if (!$link) {
 					//Fallback in case of no actual links.
@@ -108,7 +110,7 @@ class StreamerHooks {
 
 				$variables = [
 					'%ONLINE%'			=> $streamer->getOnline(),
-					'%NAME%'			=> $streamer->getName(),
+					'%NAME%'			=> (!empty($displayName) ? $displayName : $streamer->getName()),
 					'%VIEWERS%'			=> $streamer->getViewers(),
 					'%DOING%'			=> $streamer->getDoing(),
 					'%STATUS%'			=> $streamer->getStatus(),
