@@ -11,7 +11,7 @@
 
 class StreamerTemplate {
 	/**
-	 * Function Documentation
+	 * Get a built in or custom template.
 	 *
 	 * @access	public
 	 * @return	void

@@ -99,6 +99,7 @@ class StreamerInfo {
 		if ($data['streamer_id'] > 0) {
 			$streamerInfo = new StreamerInfo();
 
+			$streamerInfo->setId($data['streamer_id']);
 			$streamerInfo->setService($data['service']);
 			$streamerInfo->setRemoteName($data['remote_name']);
 			$streamerInfo->setDisplayName($data['display_name']);
@@ -126,6 +127,16 @@ class StreamerInfo {
 			return self::$serviceConstants[$service];
 		}
 		return self::SERVICE_NULL;
+	}
+
+	/**
+	 * Return the list of service constants.
+	 *
+	 * @access	public
+	 * @return	array	Service Constants
+	 */
+	static public function getServicesList() {
+		return self::$serviceConstants;
 	}
 
 	/**
@@ -162,6 +173,45 @@ class StreamerInfo {
 	}
 
 	/**
+	 * Save to the database.
+	 *
+	 * @access	public
+	 * @return	boolean	Success
+	 */
+	public function save() {
+		$success = false;
+
+		//Temporarily store and unset the streamer ID.
+		$streamerId = $this->data['streamer_id'];
+		unset($this->data['streamer_id']);
+
+		$this->DB->begin();
+		if ($streamerId > 0) {
+			$result = $this->DB->update(
+				'streamer',
+				$this->data,
+				['streamer_id' => $streamerId],
+				__METHOD__
+			);
+		} else {
+			$result = $this->DB->insert(
+				'streamer',
+				$this->data,
+				__METHOD__
+			);
+			$streamerId = $this->DB->insertId();
+		}
+		if ($result !== false) {
+			$success = true;
+		}
+		$this->DB->commit();
+
+		$this->data['streamer_id'] = $streamerId;
+
+		return $success;
+	}
+
+	/**
 	 * Return if a database entry exists.
 	 *
 	 * @access	public
@@ -173,6 +223,28 @@ class StreamerInfo {
 	}
 
 	/**
+	 * Set the Streamer Database ID.
+	 *
+	 * @access	protected
+	 * @param	integer	Streamer Database ID
+	 * @return	void
+	 */
+	protected function setId($streamerId) {
+		$this->data['streamer_id'] = intval($streamerId);
+	}
+
+	/**
+	 * Return the Streamer Database ID.
+	 *
+	 * @access	public
+	 * @return	integer	Streamer Database ID
+	 */
+	public function getId() {
+		$this->load();
+		return intval($this->data['streamer_id']);
+	}
+
+	/**
 	 * Set the service ID.
 	 *
 	 * @access	public
@@ -180,7 +252,13 @@ class StreamerInfo {
 	 * @return	boolean	Success
 	 */
 	public function setService($service) {
-		$this->data['service'] = intval($service);
+		$service = intval($service);
+		if (!in_array($service, self::$serviceConstants)) {
+			return false;
+		}
+
+		$this->data['service'] = $service;
+		return true;
 	}
 
 	/**
@@ -226,10 +304,11 @@ class StreamerInfo {
 	 *
 	 * @access	public
 	 * @return	mixed	[Optional] Display Name - Set to null to null out in the database.
-	 * @return	void
+	 * @return	boolean	Success
 	 */
 	public function setDisplayName($displayName = null) {
 		$this->data['display_name'] = $displayName;
+		return true;
 	}
 
 	/**
@@ -247,11 +326,16 @@ class StreamerInfo {
 	 * Set the Page Title for this streamer.
 	 *
 	 * @access	public
-	 * @return	object	Title
-	 * @return	void
+	 * @return	mixed	Title object or null.
+	 * @return	boolean	Success
 	 */
-	public function setPageTitle(Title $title) {
-		$this->data['page_title'] = $title;
+	public function setPageTitle($title) {
+		if ($title instanceOf Title) {
+			$this->data['page_title'] = $title;
+		} else {
+			$this->data['page_title'] = null;
+		}
+		return true;
 	}
 
 	/**

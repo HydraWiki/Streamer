@@ -24,7 +24,7 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	void
 	 */
 	public function __construct() {
-		global $wgRequest, $wgUser, $wgOut;
+		global $wgRequest, $wgUser;
 
 		parent::__construct('StreamerInfo');
 
@@ -51,7 +51,14 @@ class SpecialStreamerInfo extends SpecialPage {
 
 		$this->output->addModules('ext.streamer');
 
-		$this->streamerInfoPage();
+		switch ($subpage) {
+			case 'edit':
+				$this->streamerInfoForm();
+				break;
+			default:
+				$this->streamerInfoPage();
+				break;
+		}
 
 		$this->setHeaders();
 
@@ -76,8 +83,83 @@ class SpecialStreamerInfo extends SpecialPage {
 			$streamers[] = StreamerInfo::newFromRow($row);
 		}
 
-		$this->output->setPageTitle(wfMessage('streamer_info_page_title')->escaped());
+		$this->output->setPageTitle(wfMessage('streamer_info_page_title'));
 		$this->content = $this->templates->streamerInfoPage($streamers);
+	}
+
+	/**
+	 * Streamer Information Form
+	 *
+	 * @access	public
+	 * @return	void	[Outputs to screen]
+	 */
+	public function streamerInfoForm() {
+		$streamerId = $this->wgRequest->getInt('streamer_id');
+		if ($streamerId > 0) {
+			$result = $this->DB->select(
+				['streamer'],
+				['*'],
+				[],
+				__METHOD__
+			);
+			$row = $result->fetchRow();
+
+			$this->streamer = StreamerInfo::newFromRow($row);
+		}
+
+		if (!$this->streamer) {
+			$this->streamer = new StreamerInfo;
+			$action = wfMessage('streamer_info_form_title_add')->escaped();
+		} else {
+			$action = wfMessage('streamer_info_form_title_edit', $this->streamer->getRemoteName())->escaped();
+		}
+		$this->streamer->load();
+
+		$return = $this->streamerInfoSave();
+
+		if ($return['success']) {
+			$page = Title::newFromText('Special:StreamerInfo');
+			$this->output->redirect($page->getFullURL());
+			return;
+		}
+
+		$this->output->setPageTitle(wfMessage('streamer_info_form_title', $action));
+		$this->content = $this->templates->streamerInfoForm($this->streamer, $return['errors']);
+	}
+
+	/**
+	 * Save streamer information forms.
+	 *
+	 * @access	private
+	 * @return	array	'success' => Boolean $success, 'errors' => Array of error messages
+	 */
+	private function streamerInfoSave() {
+		$success = true;
+		if ($this->wgRequest->getVal('do') == 'save') {
+			$success = false;
+
+			if (!$this->streamer->setService($this->wgRequest->getInt('service'))) {
+				$errors['service'] = wfMessage('error_sis_bad_service')->escaped();
+			}
+			if (!$this->streamer->setRemoteName($this->wgRequest->getVal('remote_name'))) {
+				$errors['remote_name'] = wfMessage('error_sis_bad_remote_name')->escaped();
+			}
+			if (!$this->streamer->setDisplayName($this->wgRequest->getVal('display_name'))) {
+				$errors['display_name'] = wfMessage('error_sis_bad_display_name')->escaped();
+			}
+			if (!$this->streamer->setPageTitle(Title::newFromText($this->wgRequest->getVal('page_title')))) {
+				$errors['page_title'] = wfMessage('error_sis_bad_page_title')->escaped();
+			}
+
+			if (!count($errors)) {
+				$success = $this->streamer->save();
+
+				if (!$success) {
+					$errors['service'] = wfMessage('error_streamer_save_error')->escaped();
+				}
+			}
+		}
+		return ['success' => $success, 'errors' => $errors];
 	}
 
 	/**

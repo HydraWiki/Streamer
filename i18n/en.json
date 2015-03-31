@@ -12,5 +12,17 @@
 	"action-edit_streamer_info": "edit streamer information",
 	"streamerinfo": "Streamer Information",
 	"service_0": "Unknown",
-	"service_1": "Twitch"
+	"service_1": "Twitch",
+	"sif_service": "Streaming service:",
+	"sif_remote_name": "User name on streaming service:",
+	"sif_display_name": "Display name, used for link text:",
+	"sif_page_title": "Page title with namespace for links:",
+	"streamer_info_page_title": "Streamers Information",
+	"streamer_info_form_title": "$1 - Streamer Information",
+	"streamer_info_form_title_add": "Add",
+	"streamer_info_form_title_edit": "Edit '$1'",
+	"error_sis_bad_service": "Please select a valid streaming service.",
+	"error_sis_bad_remote_name": "A valid user name on the streaming service is required.",
+	"error_sis_bad_display_name": "Please enter a valid display name.",
+	"error_sis_bad_page_title": "Please enter a valid page title."
 }
