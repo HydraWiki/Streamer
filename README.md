@@ -3,7 +3,7 @@ The **Streamer** extension displays information about streamers from various str
 * **Project Homepage:** [Documentation at Github](https://github.com/CurseStaff/Streamer)
 * **Mediawiki Extension Page:** [Extension:Streamer](https://www.mediawiki.org/wiki/Extension:Streamer)
 * **Source Code:** [Source Code at Github](https://github.com/CurseStaff/Streamer)
-* **Bugs:** [Issue Tracker at Github](https://github.com/CurseStaff/Streamer/issues)
+* **Bug Reports and Feature Requests:** [Issue Tracker at Github](https://github.com/CurseStaff/Streamer/issues)
 * **Licensing:** Streamer is released under [The GNU Lesser General Public License, version 3.0](http://opensource.org/licenses/lgpl-3.0.html).
 
 
@@ -29,25 +29,30 @@ Basic Syntax:
 	{{#streamer:
 	service=[Service]
 	|user=[User]
-	|template=[Template to Use]
 	}}
 
-####Parameters for #sprite Tag
+####Parameters for #streamer Tag
 
-|       Parameter       | Description                                                                                                                                                   |
-|----------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| service               | **Required**: yes<br/>The file page containing the image to use.                                                                                              |
-| user                  | **Required**: yes<br/>The user identifier for user on the streaming service.                                                                                  |
-| template              | **Required**: no, **Default**: block, **Built In**: live, minilive, viewers, thumbnail, link<br/>Use a built in template or specify a custom template to use. |
+|       Parameter       | Required | Default | Description                                                                                                                     |
+|----------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| service               | yes      |         | The file page containing the image to use.  See **Supported Streaming Services** below.                                         |
+| user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
+| template              | no       | block   | **Built In**: block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use. |
+| link                  | no       |         | Fully qualifed URL to override the link in templates.                                                                           |
 
 ####Example
 
-To display online/offline status of TwitchPlaysPokemon from the Twitch streaming service:
+To display the default block template for TwitchPlaysPokemon from the Twitch streaming service:
 
 	{{#streamer:
 	service=Twitch
 	|user=twitchplayspokemon
-	|template=status
 	}}
 
 ![](documentation/TwitchPlaysPokemonExample.png)
+
+##Supported Streaming Services
+
+|  Service  | Parameter Value | Web Site              |
+|----------:|-----------------------------------------|
+| Twitch.tv | twitch          | http://www.twitch.tv/ |
