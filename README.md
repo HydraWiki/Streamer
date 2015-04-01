@@ -34,7 +34,7 @@ Basic Syntax:
 ####Parameters for #streamer Tag
 
 |       Parameter       | Required | Default | Description                                                                                                                     |
-|----------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------:|----------|---------|---------------------------------------------------------------------------------------------------------------------------------|
 | service               | yes      |         | The file page containing the image to use.  See **Supported Streaming Services** below.                                         |
 | user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
 | template              | no       | block   | **Built In**: block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use. |
@@ -54,5 +54,5 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 ##Supported Streaming Services
 
 |  Service  | Parameter Value | Web Site              |
-|----------:|-----------------------------------------|
+|----------:|-----------------|-----------------------|
 | Twitch.tv | twitch          | http://www.twitch.tv/ |
