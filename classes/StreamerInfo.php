@@ -234,7 +234,7 @@ class StreamerInfo {
 		if ($result !== false) {
 			$success = true;
 			$this->DB->commit();
-			$this->data['streamer_id'] = null;
+			unset($this->data['streamer_id']);
 		} else {
 			$this->DB->rollback();
 		}
