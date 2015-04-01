@@ -212,6 +212,36 @@ class StreamerInfo {
 	}
 
 	/**
+	 * Delete from the database.
+	 *
+	 * @access	public
+	 * @return	boolean	Success
+	 */
+	public function delete() {
+		$success = false;
+
+		$streamerId = $this->getId();
+
+		$this->DB->begin();
+		if ($streamerId > 0) {
+			$result = $this->DB->delete(
+				'streamer',
+				['streamer_id' => $streamerId],
+				__METHOD__
+			);
+		}
+
+		if ($result !== false) {
+			$success = true;
+			$this->DB->commit();
+		} else {
+			$this->DB->rollback();
+		}
+
+		return $success;
+	}
+
+	/**
 	 * Return if a database entry exists.
 	 *
 	 * @access	public

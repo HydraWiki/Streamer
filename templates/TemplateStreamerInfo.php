@@ -25,7 +25,7 @@ class TemplateStreamerInfo {
 	 * @return	string	Built HTML
 	 */
 	public function streamerInfoPage($streamers) {
-		$HTML .= "
+		$HTML .= Linker::link(Title::newFromText("Special:StreamerInfo/edit"), wfMessage('sip_add')->escaped())."
 		<table class='wikitable'>
 			<thead>
 				<tr>
@@ -34,6 +34,7 @@ class TemplateStreamerInfo {
 					<th>Display Name</th>
 					<th>Page Title</th>
 					<th>Link Preview</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>";
@@ -45,6 +46,7 @@ class TemplateStreamerInfo {
 					<td>".$streamer->getDisplayName()."</td>
 					<td>".($streamer->getPageTitle() ? $streamer->getPageTitle()->getPrefixedText() : '')."</td>
 					<td><a href='".$streamer->getLink(true)."'>".($streamer->getDisplayName() ? $streamer->getDisplayName() : $streamer->getRemoteName())."</a></td>
+					<td>(".Linker::link(Title::newFromText("Special:StreamerInfo/edit"), wfMessage('sip_edit')->escaped(), [], ["streamer_id" => $streamer->getId()])." | ".Linker::link(Title::newFromText("Special:StreamerInfo/delete"), wfMessage('sip_delete')->escaped(), [], ["streamer_id" => $streamer->getId()]).")</td>
 				</tr>";
 		}
 		$HTML .= "
@@ -91,7 +93,26 @@ class TemplateStreamerInfo {
 			<input id='page_title' name='page_title' type='text' value='".htmlspecialchars(($streamer->getPageTitle() instanceOf Title ? $streamer->getPageTitle()->getPrefixedText() : ''), ENT_QUOTES)."'/><br/>
 			<br/>
 			<input id='streamer_id' name='streamer_id' type='hidden' value='{$streamer->getId()}'/>
-			<input id='streamer_submit' name='streamer_submit' type='submit' value='Save'/>
+			<input id='streamer_submit' name='streamer_submit' type='submit' value='".wfMessage('sif_save')->escaped()."'/>
+		</form>";
+
+		return $HTML;
+	}
+
+	/**
+	 * Streamer Information Delete
+	 *
+	 * @access	public
+	 * @param	array	Streamer Information
+	 * @return	string	Built HTML
+	 */
+	public function streamerInfoDelete($streamer) {
+		$title = Title::newFromText("Special:StreamerInfo/delete");
+		$HTML .= "
+		<form id='streamer_info_form' method='post' action='{$title->getFullURL()}?confirm=true'>
+			".wfMessage('sid_streamer_delete_confirm')->escaped()."<br/>
+			<input id='streamer_id' name='streamer_id' type='hidden' value='{$streamer->getId()}'/>
+			<input id='streamer_submit' name='streamer_submit' type='submit' value='".wfMessage('sid_confirm')->escaped()."'/>
 		</form>";
 
 		return $HTML;

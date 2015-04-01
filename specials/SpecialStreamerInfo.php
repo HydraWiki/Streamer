@@ -52,6 +52,9 @@ class SpecialStreamerInfo extends SpecialPage {
 		$this->output->addModules('ext.streamer');
 
 		switch ($subpage) {
+			case 'delete':
+				$this->streamerInfoDelete();
+				break;
 			case 'edit':
 				$this->streamerInfoForm();
 				break;
@@ -99,7 +102,7 @@ class SpecialStreamerInfo extends SpecialPage {
 			$result = $this->DB->select(
 				['streamer'],
 				['*'],
-				[],
+				['streamer_id' => intval($streamerId)],
 				__METHOD__
 			);
 			$row = $result->fetchRow();
@@ -134,10 +137,8 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	array	'success' => Boolean $success, 'errors' => Array of error messages
 	 */
 	private function streamerInfoSave() {
-		$success = true;
+		$success = false;
 		if ($this->wgRequest->getVal('do') == 'save') {
-			$success = false;
-
 			if (!$this->streamer->setService($this->wgRequest->getInt('service'))) {
 				$errors['service'] = wfMessage('error_sis_bad_service')->escaped();
 			}
@@ -160,6 +161,41 @@ class SpecialStreamerInfo extends SpecialPage {
 			}
 		}
 		return ['success' => $success, 'errors' => $errors];
+	}
+
+	/**
+	 * Streamer Information Delete
+	 *
+	 * @access	public
+	 * @return	void	[Outputs to screen]
+	 */
+	public function streamerInfoDelete() {
+		$streamerId = $this->wgRequest->getInt('streamer_id');
+		if ($streamerId > 0) {
+			$result = $this->DB->select(
+				['streamer'],
+				['*'],
+				['streamer_id' => intval($streamerId)],
+				__METHOD__
+			);
+			$row = $result->fetchRow();
+
+			$this->streamer = StreamerInfo::newFromRow($row);
+		} else {
+			$this->output->showErrorPage('error_streamer_info', 'streamer_not_found');
+			return;
+		}
+
+		if ($this->wgRequest->getVal('confirm') == 'true' && $this->wgRequest->wasPosted()) {
+			$this->streamer->delete();
+
+			$page = Title::newFromText('Special:StreamerInfo');
+			$this->output->redirect($page->getFullURL());
+			return;
+		}
+
+		$this->output->setPageTitle(wfMessage('streamer_info_delete_title', $this->streamer->getRemoteName()));
+		$this->content = $this->templates->streamerInfoDelete($this->streamer);
 	}
 
 	/**
