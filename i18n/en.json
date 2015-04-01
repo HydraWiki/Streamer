@@ -21,6 +21,7 @@
 	"streamer_info_form_title": "$1 - Streamer Information",
 	"streamer_info_form_title_add": "Add",
 	"streamer_info_form_title_edit": "Edit '$1'",
+	"streamer_info_delete_title": "Delete '$1' - Streamer Information",
 	"error_streamer_info": "Streamer Information Error",
 	"streamer_not_found": "Streamer Information Not Found",
 	"error_sis_bad_service": "Please select a valid streaming service.",

@@ -51,6 +51,8 @@ class SpecialStreamerInfo extends SpecialPage {
 
 		$this->output->addModules('ext.streamer');
 
+		$this->setHeaders();
+
 		switch ($subpage) {
 			case 'delete':
 				$this->streamerInfoDelete();
@@ -62,8 +64,6 @@ class SpecialStreamerInfo extends SpecialPage {
 				$this->streamerInfoPage();
 				break;
 		}
-
-		$this->setHeaders();
 
 		$this->output->addHTML($this->content);
 	}
