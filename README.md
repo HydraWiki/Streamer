@@ -56,3 +56,62 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 |  Service  | Parameter Value | Web Site              |
 |----------:|-----------------|-----------------------|
 | Twitch.tv | twitch          | http://www.twitch.tv/ |
+
+
+##Templates
+There are six built in templates that come with the extension; block, live, minilive, link, viewers, and thumbnail.  By default if no template is specified it uses the block template.
+
+###Custom
+Which template is used to display streamer information can be customized through Mediawiki's templating system.  Using the "template" parameter simply add the template page name into the parser call.  **Example: template=Template:BlockCustom**
+
+There are several replacement variables used in the templates that will be automatically filled in with the correct information.
+
+* **%THUMBNAIL%** - Periodically updated thumbnail image of a currently live stream.
+* **%LOGO%** - Static logo image.
+* **%NAME%** - Streamer's display name, as reported from the streaming service.  Will fall back to the streamer's user name if one is not available.
+* **%ONLINE%** - Integer based boolean if the streamer is online.  Use the {{#ifeq:...}} parser function to check against this.
+* **%LINK%** - Link to the streamer's page on the service.  If a custom page link is specified in the Special:StreamerInfo interface it will be used instead.
+
+###Built In
+The built in templates below are copied from the StreamerTemplate class file and are placed here for reference purposes.  They can be used to assist in building custom templates.
+
+####block
+	<div class='stream block'>
+		<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
+		<div class='stream_info'>
+			<div class='name'><a href='%LINK%'>%NAME%</a></div>
+			<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'></div><div class='text'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div>
+		</div>
+	</div>
+
+####live
+	<div class='stream live'>
+		<div class='stream_info'>
+			<div class='name'><a href='%LINK%'>%NAME%</a></div>
+			<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'></div><div class='text'>{{#ifeq:%ONLINE%|1|".wfMessage('stream_online')->escaped()."|".wfMessage('stream_offline')->escaped()."}}</div></div>
+		</div>
+	</div>
+
+####minilive
+	<div class='stream minilive'>
+		<div class='stream_info'>
+			<div class='name'><a href='%LINK%'>%NAME%</a></div>
+			<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'></div></div>
+		</div>
+	</div>
+
+####link
+	<div class='name'><a href='%LINK%'>%NAME%</a></div>
+
+####viewers
+	<div class='stream viewers'>
+		<div class='stream_info'>
+			<div class='name'><a href='%LINK%'>%NAME%</a></div>
+			<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'></div><div class='text'>%VIEWERS%</div></div>
+		</div>
+	</div>
+
+####thumbnail
+	<div class='stream thumbnail'>
+		<div class='logo'><img src='{{#if:%THUMBNAIL%|%THUMBNAIL%|%LOGO%}}'/></div>
+	</div>
