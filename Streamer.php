@@ -16,7 +16,7 @@ if (!defined('MEDIAWIKI')) {
 /******************************************/
 /* Credits                                */
 /******************************************/
-define('STREAMER_VERSION', '0.1.0');
+define('STREAMER_VERSION', '0.2.0');
 
 $wgExtensionCredits['parserhook'][] = [
 	'path'				=> __FILE__,
