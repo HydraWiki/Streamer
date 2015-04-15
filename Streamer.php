@@ -37,6 +37,7 @@ if (!defined('STREAMER_EXT_DIR')) {
 }
 
 $wgAvailableRights[] = 'edit_streamer_info';
+$wgGroupPermissions['sysop']['edit_streamer_info'] = true;
 
 $wgExtensionMessagesFiles['Streamer']			= "{$extDir}/Streamer.i18n.php";
 $wgExtensionMessagesFiles['StreamerMagic']		= "{$extDir}/Streamer.i18n.magic.php";

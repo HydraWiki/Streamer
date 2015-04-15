@@ -73,6 +73,8 @@ class StreamerHooks {
 	 * @return	array	Generated Output
 	 */
 	static public function parseStreamerTag(Parser &$parser, PPFrame $frame, $arguments) {
+		self::$errors = false;
+
 		/************************************/
 		/* Clean Parameters                 */
 		/************************************/
