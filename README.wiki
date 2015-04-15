@@ -37,10 +37,12 @@ The #streamer parser tag takes what service is being used, who the user is, and 
 
 Basic Syntax:
 
-	{{#streamer:
-	service=[Service]
-	|user=[User]
-	}}
+<pre><nowiki>
+{{#streamer:
+service=[Service]
+|user=[User]
+}}
+</nowiki></pre>
 
 ====Parameters for #streamer Tag====
 
