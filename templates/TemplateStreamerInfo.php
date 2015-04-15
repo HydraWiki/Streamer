@@ -38,16 +38,23 @@ class TemplateStreamerInfo {
 				</tr>
 			</thead>
 			<tbody>";
-		foreach ($streamers as $streamer) {
+		if (is_array($streamers)) {
+			foreach ($streamers as $streamer) {
+				$HTML .= "
+					<tr>
+						<td>".wfMessage("service_".$streamer->getService())->escaped()."</td>
+						<td>".$streamer->getRemoteName()."</td>
+						<td>".$streamer->getDisplayName()."</td>
+						<td>".($streamer->getPageTitle() ? $streamer->getPageTitle()->getPrefixedText() : '')."</td>
+						<td><a href='".$streamer->getLink(true)."'>".($streamer->getDisplayName() ? $streamer->getDisplayName() : $streamer->getRemoteName())."</a></td>
+						<td>(".Linker::link(Title::newFromText("Special:StreamerInfo/edit"), wfMessage('sip_edit')->escaped(), [], ["streamer_id" => $streamer->getId()])." | ".Linker::link(Title::newFromText("Special:StreamerInfo/delete"), wfMessage('sip_delete')->escaped(), [], ["streamer_id" => $streamer->getId()]).")</td>
+					</tr>";
+			}
+		} else {
 			$HTML .= "
-				<tr>
-					<td>".wfMessage("service_".$streamer->getService())->escaped()."</td>
-					<td>".$streamer->getRemoteName()."</td>
-					<td>".$streamer->getDisplayName()."</td>
-					<td>".($streamer->getPageTitle() ? $streamer->getPageTitle()->getPrefixedText() : '')."</td>
-					<td><a href='".$streamer->getLink(true)."'>".($streamer->getDisplayName() ? $streamer->getDisplayName() : $streamer->getRemoteName())."</a></td>
-					<td>(".Linker::link(Title::newFromText("Special:StreamerInfo/edit"), wfMessage('sip_edit')->escaped(), [], ["streamer_id" => $streamer->getId()])." | ".Linker::link(Title::newFromText("Special:StreamerInfo/delete"), wfMessage('sip_delete')->escaped(), [], ["streamer_id" => $streamer->getId()]).")</td>
-				</tr>";
+					<tr>
+						<td colspan='6'>".wfMessage('no_streamers_found')."</td>
+					</tr>";
 		}
 		$HTML .= "
 			</tbody>

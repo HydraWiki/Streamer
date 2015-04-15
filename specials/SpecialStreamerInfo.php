@@ -83,7 +83,9 @@ class SpecialStreamerInfo extends SpecialPage {
 		);
 
 		while ($row = $result->fetchRow()) {
-			$streamers[] = StreamerInfo::newFromRow($row);
+			if (is_array($row) && $row['streamer_id'] > 0) {
+				$streamers[] = StreamerInfo::newFromRow($row);
+			}
 		}
 
 		$this->output->setPageTitle(wfMessage('streamer_info_page_title'));

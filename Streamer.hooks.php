@@ -79,8 +79,10 @@ class StreamerHooks {
 		/* Clean Parameters                 */
 		/************************************/
 		$rawParameterOptions = [];
-		foreach ($arguments as $argument) {
-			$rawParameterOptions[] = trim($frame->expand($argument));
+		if (is_array($arguments)) {
+			foreach ($arguments as $argument) {
+				$rawParameterOptions[] = trim($frame->expand($argument));
+			}
 		}
 		$parameters = self::cleanAndSetupParameters($rawParameterOptions);
 
