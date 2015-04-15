@@ -44,12 +44,34 @@ Basic Syntax:
 
 ====Parameters for #streamer Tag====
 
-|       Parameter       | Required | Default | Description                                                                                                                     |
-|----------------------:|----------|---------|---------------------------------------------------------------------------------------------------------------------------------|
-| service               | yes      |         | The file page containing the image to use.  See '''Supported Streaming Services''' below.                                         |
-| user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
-| template              | no       | block   | '''Built In''': block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use. |
-| link                  | no       |         | Fully qualifed URL to override the link in templates.                                                                           |
+{| class="wikitable"
+|-
+! Parameter
+! Required
+! Default
+! Description
+|-
+| <code>service</code>
+| yes
+|
+: The file page containing the image to use.
+|-
+| <code>user</code>
+| yes
+|
+: The user identifier for user on the streaming service. 
+|-
+| <code>template</code>
+| no
+| block
+: '''Built In''': block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use.
+|-
+| <code>link</code>
+| no
+|
+: Fully qualifed URL to override the link in templates.
+|}
+
 
 ====Example====
 
@@ -70,6 +92,17 @@ service=Twitch
 |----------:|-----------------|-----------------------|
 | Twitch.tv | twitch          | http://www.twitch.tv/ |
 
+
+{| class="wikitable"
+|-
+! Service
+! Parameter Value
+! Web Site
+|-
+: Twitch.tv
+: twitch
+: [http://www.twitch.tv/ http://www.twitch.tv/]
+|}
 
 ==Templates==
 There are six built in templates that come with the extension; block, live, minilive, link, viewers, and thumbnail.  By default if no template is specified it uses the block template.
