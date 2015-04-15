@@ -32,7 +32,7 @@ The '''Streamer''' extension displays information about streamers from various s
 
 ==Tags==
 
-===\#streamer - Parser Tag===
+===#streamer - Parser Tag===
 The #streamer parser tag takes what service is being used, who the user is, and optionally how to display the information.
 
 Basic Syntax:
