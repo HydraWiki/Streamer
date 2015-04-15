@@ -54,22 +54,22 @@ Basic Syntax:
 | <code>service</code>
 | yes
 |
-: The file page containing the image to use.
+| The file page containing the image to use.
 |-
 | <code>user</code>
 | yes
 |
-: The user identifier for user on the streaming service. 
+| The user identifier for user on the streaming service. 
 |-
 | <code>template</code>
 | no
 | block
-: '''Built In''': block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use.
+| '''Built In''': block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use.
 |-
 | <code>link</code>
 | no
 |
-: Fully qualifed URL to override the link in templates.
+| Fully qualifed URL to override the link in templates.
 |}
 
 
@@ -88,20 +88,15 @@ service=Twitch
 
 ==Supported Streaming Services==
 
-|  Service  | Parameter Value | Web Site              |
-|----------:|-----------------|-----------------------|
-| Twitch.tv | twitch          | http://www.twitch.tv/ |
-
-
 {| class="wikitable"
 |-
 ! Service
 ! Parameter Value
 ! Web Site
 |-
-: Twitch.tv
-: twitch
-: [http://www.twitch.tv/ http://www.twitch.tv/]
+| Twitch.tv
+| twitch
+| [http://www.twitch.tv/ http://www.twitch.tv/]
 |}
 
 ==Templates==
