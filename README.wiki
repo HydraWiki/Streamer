@@ -24,15 +24,9 @@ The '''Streamer''' extension displays information about streamers from various s
 ;Licensing: Streamer is released under [http://opensource.org/licenses/lgpl-3.0.html The GNU Lesser General Public License, version 3.0].
 
 
-#Installation
+=Installation=
 
-Download and place the file(s) in a directory called Streamer in your extensions/ folder.
-
-Add the following code at the bottom of your LocalSettings.php:
-
-	require_once("$IP/extensions/Streamer/Streamer.php");
-
-Done! Navigate to "Special:Version" on your wiki to verify that the extension is successfully installed.
+{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/CurseStaff/Streamer/archive/v0.2.0.zip Download]}}
 
 =Usage=
 
