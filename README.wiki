@@ -1,6 +1,6 @@
 {{ {{TNTN|Extension}}
 |name        = Streamer
-|license     = {{EL|LGPLv3}}
+|license     = {{EL|LGPL3}}
 |status      = beta
 |type        = parser function
 |author      = Curse Inc. Wiki Platform Team, Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]])
