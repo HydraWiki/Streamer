@@ -1,5 +1,5 @@
 {{ {{TNTN|Extension}}
-|name        = SpriteSheet
+|name        = Streamer
 |license     = {{EL|LGPLv3}}
 |status      = beta
 |type        = parser function
