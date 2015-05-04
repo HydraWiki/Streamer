@@ -59,6 +59,7 @@ class StreamerHooks {
      */
     static public function onParserFirstCallInit(Parser &$parser) {
 		$parser->setFunctionHook("streamer", "StreamerHooks::parseStreamerTag", SFH_OBJECT_ARGS);
+		$parser->setFunctionHook("streamerinfo", "StreamerHooks::parseStreamerInfoTag", SFH_OBJECT_ARGS);
 
 		return true;
 	}
@@ -142,6 +143,81 @@ class StreamerHooks {
 		return [
 			$html,
 			'noparse' => false,
+			'isHTML' => true
+		];
+	}
+
+	/**
+	 * Update database records for streamer information from the streamerinfo tag.
+	 *
+	 * @access	public
+	 * @param	object	Parser
+	 * @param	object	PPFrame
+	 * @param	array	Arguments
+	 * @return	array	Generated Output
+	 */
+	static public function parseStreamerInfoTag(Parser &$parser, PPFrame $frame, $arguments) {
+		self::$errors = false;
+
+		$title = $parser->getTitle();
+
+		$html = '';
+
+		if ($parser->getOptions()->getIsPreview()) {
+			return [
+				$html,
+				'noparse' => true,
+				'isHTML' => true
+			];
+		}
+
+		/************************************/
+		/* Clean Parameters                 */
+		/************************************/
+		$rawParameterOptions = [];
+		if (is_array($arguments)) {
+			foreach ($arguments as $argument) {
+				$rawParameterOptions[] = trim($frame->expand($argument));
+			}
+		}
+		$parameters = self::cleanAndSetupParameters($rawParameterOptions);
+
+		/************************************/
+		/* Error Checking                   */
+		/************************************/
+		if (self::$errors === false) {
+			$streamer = ApiStreamerBase::newFromService($parameters['service']);
+			$userGood = $streamer->setUser($parameters['user']);
+
+			if (!$userGood) {
+				self::setError('streamer_error_invalid_user', [$parameters['service'], $parameters['user']]);
+			} else {
+				/************************************/
+				/* Database Handling                */
+				/************************************/
+				$streamerInfo = StreamerInfo::newFromServiceAndName($parameters['service'], $parameters['user']);
+				$streamerInfo->load();
+
+				$streamerInfo->setDisplayName($title->getRootText());
+				if ($title !== null) {
+					$streamerInfo->setPageTitle($title);
+				}
+
+				$streamerInfo->save();
+			}
+		}
+
+		if (self::$errors !== false) {
+			$html = "
+			<div class='errorbox'>
+				<strong>Streamer ".STREAMER_VERSION."</strong><br/>
+				".implode("<br/>\n", self::$errors)."
+			</div>";
+		}
+
+		return [
+			$html,
+			'noparse' => true,
 			'isHTML' => true
 		];
 	}

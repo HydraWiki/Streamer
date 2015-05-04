@@ -12,5 +12,6 @@
 $magicWords = [];
 
 $magicWords['en']  = [
-	'streamer'	=> [0, 'streamer']
+	'streamer'		=> [0, 'streamer'],
+	'streamerinfo'	=> [0, 'streamerinfo']
 ];
