@@ -35,7 +35,7 @@ Basic Syntax:
 
 |       Parameter       | Required | Default | Description                                                                                                                     |
 |----------------------:|----------|---------|---------------------------------------------------------------------------------------------------------------------------------|
-| service               | yes      |         | The file page containing the image to use.  See **Supported Streaming Services** below.                                         |
+| service               | yes      |         | The service name to look up users on.  See **Supported Streaming Services**.                                                    |
 | user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
 | template              | no       | block   | **Built In**: block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use. |
 | link                  | no       |         | Fully qualifed URL to override the link in templates.                                                                           |
@@ -126,11 +126,11 @@ Basic Syntax:
 	|user=[User]
 	}}
 
-####Parameters for #streamer Tag
+####Parameters for #streamerinfo Tag
 
 |       Parameter       | Required | Default | Description                                                                                                                     |
 |----------------------:|----------|---------|---------------------------------------------------------------------------------------------------------------------------------|
-| service               | yes      |         | The file page containing the image to use.  See **Supported Streaming Services**.                                               |
+| service               | yes      |         | The service name to look up users on.  See **Supported Streaming Services**.                                                    |
 | user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
 
 ####Example
