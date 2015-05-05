@@ -160,7 +160,7 @@ The built in templates below are copied from the StreamerTemplate class file and
 </nowiki></pre>
 
 
-===#streamer - Parser Tag===
+===#streamerinfo - Parser Meta Tag===
 The #streamerinfo parser meta tag takes what service is being used and who the user is to tag an article as related to that person.  It will cause any links automatically generated from the #streamer tag to use the article page as the destination and display name.  Streamer information created from tagging or manually entered will be visible in the [[Special:StreamerInfo]] interface.  Note: Articles tagged with the #streamerinfo tag will override any manually entered information.
 
 Basic Syntax:
