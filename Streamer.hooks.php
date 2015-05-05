@@ -303,6 +303,52 @@ class StreamerHooks {
 	}
 
 	/**
+	 * Handle dispatcher watch list updates when an article is saved.
+	 *
+	 * @access	public
+	 * @param	object	WikiPage modified
+	 * @param	object	User performing the modification
+	 * @param	object	Content object
+	 * @param	string	Edit summary/comment
+	 * @param	boolean	Whether or not the edit was marked as minor
+	 * @param	boolean	$isWatch: (No longer used)
+	 * @param	object	$section: (No longer used)
+	 * @param	integer	Flags passed to WikiPage::doEditContent()
+	 * @param	mixed	New Revision object of the article
+	 * @param	object	Status object about to be returned by doEditContent()
+	 * @param	integer	The revision ID (or false) this edit was based on
+	 * @return	boolean True
+	 */
+	static public function onPageContentSaveComplete($article, $user, $content, $summary, $isMinor, $isWatch, $section, $flags, $revision, $status, $baseRevId) {
+		if ($revision instanceOf Revision) {
+			$revisionContent = $revision->getContent(Revision::RAW);
+			$previousRevision = $revision->getPrevious();
+			$previousRevisionContent = $previousRevision->getContent(Revision::RAW);
+
+			if ($previousRevision instanceOf Revision) {
+				if (strpos($previousRevisionContent->getNativeData(), "{{#streamerinfo") !== false && strpos($revisionContent->getNativeData(), "{{#streamerinfo") === false) {
+					//Time to remove from the database.
+					$DB = wfGetDB(DB_MASTER);
+					$result = $DB->select(
+						['streamer'],
+						['*'],
+						['page_title' => $revision->getTitle()],
+						__METHOD__
+					);
+					$row = $result->fetchRow();
+
+					$streamerInfo = StreamerInfo::newFromRow($row);
+					if ($streamerInfo !== false) {
+						$streamerInfo->delete();
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Setups and Modifies Database Information
 	 *
 	 * @access	public
