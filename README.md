@@ -51,12 +51,6 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 
 ![](documentation/TwitchPlaysPokemonExample.png)
 
-####Supported Streaming Services
-
-|  Service  | Parameter Value | Web Site              |
-|----------:|-----------------|-----------------------|
-| Twitch.tv | twitch          | http://www.twitch.tv/ |
-
 
 ####Templates
 There are six built in templates that come with the extension; block, live, minilive, link, viewers, and thumbnail.  By default if no template is specified it uses the block template.
@@ -143,3 +137,9 @@ To tag the article "Twitch Plays Pokemon" with the Twitch user "twitchplayspokem
 	}}
 
 This would cause all output from the #streamer tag to reference to the "Twitch Plays Pokemon" when generating links and display names.
+
+##Supported Streaming Services
+
+|  Service  | Parameter Value | Web Site              |
+|----------:|-----------------|-----------------------|
+| Twitch.tv | twitch          | http://www.twitch.tv/ |

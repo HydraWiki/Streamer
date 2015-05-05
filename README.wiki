@@ -88,18 +88,6 @@ service=Twitch
 
 [[File:TwitchPlaysPokemonExample.png]]
 
-====Supported Streaming Services====
-
-{| class="wikitable"
-|-
-! Service
-! Parameter Value
-! Web Site
-|-
-| Twitch.tv
-| twitch
-| [http://www.twitch.tv/ http://www.twitch.tv/]
-|}
 
 ====Templates====
 There are six built in templates that come with the extension; block, live, minilive, link, viewers, and thumbnail.  By default if no template is specified it uses the block template.
@@ -171,6 +159,7 @@ The built in templates below are copied from the StreamerTemplate class file and
 </div>
 </nowiki></pre>
 
+
 ===#streamer - Parser Tag===
 The #streamerinfo parser meta tag takes what service is being used and who the user is to tag an article as related to that person.  It will cause any links automatically generated from the #streamer tag to use the article page as the destination and display name.  Streamer information created from tagging or manually entered will be visible in the [[Special:StreamerInfo]] interface.  Note: Articles tagged with the #streamerinfo tag will override any manually entered information.
 
@@ -182,6 +171,7 @@ service=[Service]
 |user=[User]
 }}
 </nowiki></pre>
+
 
 ====Parameters for #streamerinfo Tag====
 
@@ -216,3 +206,17 @@ service=Twitch
 </nowiki></pre>
 
 This would cause all output from the #streamer tag to reference to the "Twitch Plays Pokemon" when generating links and display names.
+
+
+==Supported Streaming Services==
+
+{| class="wikitable"
+|-
+! Service
+! Parameter Value
+! Web Site
+|-
+| Twitch.tv
+| twitch
+| [http://www.twitch.tv/ http://www.twitch.tv/]
+|}
