@@ -303,7 +303,7 @@ class StreamerHooks {
 	}
 
 	/**
-	 * Handle dispatcher watch list updates when an article is saved.
+	 * Catch when #streamerinfo tags are removed and delete from the database.
 	 *
 	 * @access	public
 	 * @param	object	WikiPage modified
