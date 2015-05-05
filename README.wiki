@@ -4,8 +4,8 @@
 |status      = beta
 |type        = parser function
 |author      = Curse Inc. Wiki Platform Team, Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]])
-|version     = 0.2.0
-|update      = 2015-04-15
+|version     = 0.3.0
+|update      = 2015-05-05
 |mediawiki   = 1.23+
 |php         = 5.4+
 |download    = {{ {{TNTN|GithubDownload}} |CurseStaff|Streamer}}
@@ -26,7 +26,7 @@ The '''Streamer''' extension displays information about streamers from various s
 
 =Installation=
 
-{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/CurseStaff/Streamer/archive/v0.2.0.zip Download]}}
+{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/CurseStaff/Streamer/archive/v0.3.0.zip Download]}}
 
 =Usage=
 
