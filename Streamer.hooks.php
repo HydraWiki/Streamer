@@ -323,9 +323,9 @@ class StreamerHooks {
 		if ($revision instanceOf Revision) {
 			$revisionContent = $revision->getContent(Revision::RAW);
 			$previousRevision = $revision->getPrevious();
-			$previousRevisionContent = $previousRevision->getContent(Revision::RAW);
 
 			if ($previousRevision instanceOf Revision) {
+				$previousRevisionContent = $previousRevision->getContent(Revision::RAW);
 				if (strpos($previousRevisionContent->getNativeData(), "{{#streamerinfo") !== false && strpos($revisionContent->getNativeData(), "{{#streamerinfo") === false) {
 					//Time to remove from the database.
 					$DB = wfGetDB(DB_MASTER);
