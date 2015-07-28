@@ -53,8 +53,6 @@ $wgAutoloadClasses['TemplateStreamerInfo']		= "{$extDir}/templates/TemplateStrea
 
 $wgSpecialPages['StreamerInfo']					= 'SpecialStreamerInfo';
 
-$wgSpecialPageGroups['StreamerInfo']			= 'other';
-
 $wgHooks['ParserFirstCallInit'][]				= 'StreamerHooks::onParserFirstCallInit';
 $wgHooks['PageContentSaveComplete'][]			= 'StreamerHooks::onPageContentSaveComplete';
 $wgHooks['LoadExtensionSchemaUpdates'][]		= 'StreamerHooks::onLoadExtensionSchemaUpdates';

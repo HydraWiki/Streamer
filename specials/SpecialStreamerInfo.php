@@ -24,12 +24,10 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	void
 	 */
 	public function __construct() {
-		global $wgRequest, $wgUser;
+		parent::__construct('StreamerInfo', 'edit_streamer_info');
 
-		parent::__construct('StreamerInfo');
-
-		$this->wgRequest	= $wgRequest;
-		$this->wgUser		= $wgUser;
+		$this->wgRequest	= $this->getRequest();
+		$this->wgUser		= $this->getUser();
 		$this->output		= $this->getOutput();
 
 		$this->DB = wfGetDB(DB_MASTER);
@@ -42,10 +40,7 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	void	[Outputs to screen]
 	 */
 	public function execute($subpage) {
-		if (!$this->wgUser->isAllowed('edit_streamer_info')) {
-			throw new PermissionsError('edit_streamer_info');
-			return;
-		}
+		$this->checkPermissions();
 
 		$this->templates = new TemplateStreamerInfo();
 
@@ -207,16 +202,6 @@ class SpecialStreamerInfo extends SpecialPage {
 	 * @return	boolean
 	 */
 	public function isListed() {
-		return $this->wgUser->isAllowed('edit_streamer_info');
-	}
-
-	/**
-	 * Lets others determine that this special page is restricted.
-	 *
-	 * @access	public
-	 * @return	boolean	False
-	 */
-	public function isRestricted() {
-		return true;
+		return $this->userCanExecute($this->wgUser);
 	}
 }
