@@ -60,11 +60,17 @@ Which template is used to display streamer information can be customized through
 
 There are several replacement variables used in the templates that will be automatically filled in with the correct information.
 
-* **%THUMBNAIL%** - Periodically updated thumbnail image of a currently live stream.
-* **%LOGO%** - Static logo image.
+* **%ONLINE%** - Boolean true/false flag if the streamer is currently streaming.  Can be used in parser functions.
 * **%NAME%** - Streamer's display name, as reported from the streaming service.  Will fall back to the streamer's user name if one is not available.
-* **%ONLINE%** - Integer based boolean if the streamer is online.  Use the {{#ifeq:...}} parser function to check against this.
-* **%LINK%** - Link to the streamer's page on the service.  If a custom page link is specified in the Special:StreamerInfo interface it will be used instead.
+* **%VIEWERS%** - Number of current live viewers.
+* **%DOING%** - What the streamer is doing.  This is typically the name of a video game they are playing.
+* **'%STATUS%** - Custom status field set by the channel.  This might be a custom stream title or social status depending on the service.
+* **%LIFETIME_VIEWS%** - Number of overall lifetime views on the channel.  This count may include video on demand views depending on the service.
+* **%FOLLOWERS%** - Number of followers(subscriptions) that the channel has.
+* **%LOGO%** - Static logo image of the user or channel avatar.
+* **%THUMBNAIL%** - Periodically updated thumbnail image of a currently live stream.
+* **%CHANNEL_URL%** - Direct unmodified URL to the channel on the service.
+* **%LINK%** - URL to the streamer's page on the service.  If a custom page link is specified in the Special:StreamerInfo interface it will be used instead.
 
 #####Built In
 The built in templates below are copied from the StreamerTemplate class file and are placed here for reference purposes.  They can be used to assist in building custom templates.
@@ -142,4 +148,6 @@ This would cause all output from the #streamer tag to reference to the "Twitch P
 
 |  Service  | Parameter Value | Web Site              |
 |----------:|-----------------|-----------------------|
+| Azubu.tv  | azubu           | http://www.azubu.tv/  |
+| Beam      | beam            | http://beam.pro/      |
 | Twitch.tv | twitch          | http://www.twitch.tv/ |

@@ -21,6 +21,7 @@ class StreamerHooks {
 			'default'	=> null,
 			'values'	=> [
 				'azubu',
+				'beam',
 				'twitch'
 			]
 		],
@@ -124,6 +125,7 @@ class StreamerHooks {
 						'%DOING%'			=> $streamer->getDoing(),
 						'%STATUS%'			=> $streamer->getStatus(),
 						'%LIFETIME_VIEWS%'	=> $streamer->getLifetimeViews(),
+						'%FOLLOWERS%'		=> $streamer->getFollowers(),
 						'%LOGO%'			=> $streamer->getLogo(),
 						'%THUMBNAIL%'		=> $streamer->getThumbnail(),
 						'%CHANNEL_URL%'		=> $streamer->getChannelUrl(),
@@ -249,7 +251,7 @@ class StreamerHooks {
 			$option = trim($option);
 
 			if (isset(self::$parameters[$parameter])) {
-				if (is_array(self::$parameters[$parameter]['values'])) {
+				if (array_key_exists('values', self::$parameters[$parameter]) && is_array(self::$parameters[$parameter]['values'])) {
 					if (!in_array($option, self::$parameters[$parameter]['values'])) {
 						//Throw an error.
 						self::setError('streamer_error_invalid_option', [$parameter, $option]);

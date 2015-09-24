@@ -45,8 +45,9 @@ $wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
 
 $wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
 $wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php";
-$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 $wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/ApiAzubu.php";
+$wgAutoloadClasses['ApiBeam']					= "{$extDir}/classes/ApiBeam.php";
+$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 $wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
 $wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
