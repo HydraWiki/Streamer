@@ -16,7 +16,7 @@ if (!defined('MEDIAWIKI')) {
 /******************************************/
 /* Credits                                */
 /******************************************/
-define('STREAMER_VERSION', '0.3.0');
+define('STREAMER_VERSION', '0.4.0');
 
 $wgExtensionCredits['parserhook'][] = [
 	'path'				=> __FILE__,
@@ -46,6 +46,7 @@ $wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
 $wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
 $wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php";
 $wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
+$wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/ApiAzubu.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 $wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
 $wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";

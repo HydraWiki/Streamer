@@ -19,7 +19,10 @@ class StreamerHooks {
 		'service' => [
 			'required'	=> true,
 			'default'	=> null,
-			'values'	=> ['twitch']
+			'values'	=> [
+				'azubu',
+				'twitch'
+			]
 		],
 		'user' => [
 			'required'	=> true,
@@ -92,43 +95,47 @@ class StreamerHooks {
 		/************************************/
 		if (self::$errors === false) {
 			$streamer = ApiStreamerBase::newFromService($parameters['service']);
-			$userGood = $streamer->setUser($parameters['user']);
+			if ($streamer !== false) {
+				$userGood = $streamer->setUser($parameters['user']);
 
-			if (!$userGood) {
-				self::setError('streamer_error_invalid_user', [$parameters['service'], $parameters['user']]);
-			} else {
-				/************************************/
-				/* HMTL Generation                  */
-				/************************************/
-				$streamerInfo = StreamerInfo::newFromServiceAndName($parameters['service'], $parameters['user']);
-				$displayName = $streamerInfo->getDisplayName();
-
-				if (isset($parameters['link'])) {
-					$link = $parameters['link'];
+				if (!$userGood) {
+					self::setError('streamer_error_invalid_user', [$parameters['service'], $parameters['user']]);
 				} else {
-					$link = $streamerInfo->getLink();
+					/************************************/
+					/* HMTL Generation                  */
+					/************************************/
+					$streamerInfo = StreamerInfo::newFromServiceAndName($parameters['service'], $parameters['user']);
+					$displayName = $streamerInfo->getDisplayName();
+
+					if (isset($parameters['link'])) {
+						$link = $parameters['link'];
+					} else {
+						$link = $streamerInfo->getLink();
+					}
+					if (!$link) {
+						//Fallback in case of no actual links.
+						$link = $streamer->getChannelUrl();
+					}
+
+					$variables = [
+						'%ONLINE%'			=> $streamer->getOnline(),
+						'%NAME%'			=> (!empty($displayName) ? $displayName : $streamer->getName()),
+						'%VIEWERS%'			=> $streamer->getViewers(),
+						'%DOING%'			=> $streamer->getDoing(),
+						'%STATUS%'			=> $streamer->getStatus(),
+						'%LIFETIME_VIEWS%'	=> $streamer->getLifetimeViews(),
+						'%LOGO%'			=> $streamer->getLogo(),
+						'%THUMBNAIL%'		=> $streamer->getThumbnail(),
+						'%CHANNEL_URL%'		=> $streamer->getChannelUrl(),
+						'%LINK%'			=> $link
+					];
+
+					$html = self::getTemplateWithReplacements($parameters['template'], $variables);
+
+					$parser->getOutput()->addModuleStyles(['ext.streamer']);
 				}
-				if (!$link) {
-					//Fallback in case of no actual links.
-					$link = $streamer->getChannelUrl();
-				}
-
-				$variables = [
-					'%ONLINE%'			=> $streamer->getOnline(),
-					'%NAME%'			=> (!empty($displayName) ? $displayName : $streamer->getName()),
-					'%VIEWERS%'			=> $streamer->getViewers(),
-					'%DOING%'			=> $streamer->getDoing(),
-					'%STATUS%'			=> $streamer->getStatus(),
-					'%LIFETIME_VIEWS%'	=> $streamer->getLifetimeViews(),
-					'%LOGO%'			=> $streamer->getLogo(),
-					'%THUMBNAIL%'		=> $streamer->getThumbnail(),
-					'%CHANNEL_URL%'		=> $streamer->getChannelUrl(),
-					'%LINK%'			=> $link
-				];
-
-				$html = self::getTemplateWithReplacements($parameters['template'], $variables);
-
-				$parser->getOutput()->addModuleStyles(['ext.streamer']);
+			} else {
+				self::setError('streamer_error_missing_service', 'Api'.ucfirst($parameters['service']));
 			}
 		}
 
