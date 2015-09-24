@@ -60,11 +60,11 @@ Which template is used to display streamer information can be customized through
 
 There are several replacement variables used in the templates that will be automatically filled in with the correct information.
 
-* **%ONLINE%** - Boolean true/false flag if the streamer is currently streaming.  Can be used in parser functions.
+* **%ONLINE%** - Integer based boolean if the streamer is online.  Use the {{#ifeq:...}} parser function to check against this.
 * **%NAME%** - Streamer's display name, as reported from the streaming service.  Will fall back to the streamer's user name if one is not available.
 * **%VIEWERS%** - Number of current live viewers.
 * **%DOING%** - What the streamer is doing.  This is typically the name of a video game they are playing.
-* **'%STATUS%** - Custom status field set by the channel.  This might be a custom stream title or social status depending on the service.
+* **%STATUS%** - Custom status field set by the channel.  This might be a custom stream title or social status depending on the service.
 * **%LIFETIME_VIEWS%** - Number of overall lifetime views on the channel.  This count may include video on demand views depending on the service.
 * **%FOLLOWERS%** - Number of followers(subscriptions) that the channel has.
 * **%LOGO%** - Static logo image of the user or channel avatar.
