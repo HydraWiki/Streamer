@@ -48,6 +48,7 @@ $wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php
 $wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/ApiAzubu.php";
 $wgAutoloadClasses['ApiBeam']					= "{$extDir}/classes/ApiBeam.php";
 $wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
+$wgAutoloadClasses['ApiYoutube']					= "{$extDir}/classes/ApiYoutube.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 $wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
 $wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
@@ -65,3 +66,5 @@ $wgResourceModules['ext.streamer'] = [
 	'styles'		=> ['css/streamer.css'],
 	'position'		=> 'top'
 ];
+
+$wgYouTubeApiKey = null;

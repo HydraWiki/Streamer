@@ -28,6 +28,17 @@ The '''Streamer''' extension displays information about streamers from various s
 
 {{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/CurseStaff/Streamer/archive/v0.4.0.zip Download]}}
 
+== Configuration ==
+Streamer only requires configuration if the YouTube service will be used.
+
+{|class = "wikitable"
+!Setting
+!Default
+!Description
+|-
+|<code>$wgYouTubeApiKey || <code>null</code> || Accessing the YouTube API requires [https://developers.google.com/youtube/registering_an_application registering with Google and obtaining an API key].
+|}
+
 =Usage=
 
 ==Tags==

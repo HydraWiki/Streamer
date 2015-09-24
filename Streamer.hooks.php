@@ -22,7 +22,8 @@ class StreamerHooks {
 			'values'	=> [
 				'azubu',
 				'beam',
-				'twitch'
+				'twitch',
+				'youtube'
 			]
 		],
 		'user' => [

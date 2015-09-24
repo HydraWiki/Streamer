@@ -17,6 +17,14 @@ Add the following code at the bottom of your LocalSettings.php:
 
 Done! Navigate to "Special:Version" on your wiki to verify that the extension is successfully installed.
 
+##Configuration
+Streamer only requires configuration if the YouTube service will be used.
+
+|          Setting         | Default | Description                                                                                                                                              |
+|:-------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $wgYouTubeApiKey         | null    | Accessing the YouTube API requires [registering with Google and obtaining an API key](https://developers.google.com/youtube/registering_an_application). |
+
+
 #Usage
 
 ##Tags
