@@ -58,11 +58,11 @@ class ApiAzubu extends ApiStreamerBase {
 		if (isset($json['user']['display_name'])) {
 			$this->setName($json['user']['display_name']);
 			$this->setLogo($json['user']['profile']['url_photo_large']);
-			//$this->setDoing($json['game']);
+			$this->setDoing($json['category']['title']);
 			$this->setViewers($json['view_count']);
 			$this->setLifetimeViews($json['vods_view_count']);
 			$this->setChannelUrl($json['url_channel']);
-			//$this->setStatus($json['status']);
+			$this->setStatus($json['title']);
 			$this->setFollowers($json['followers_count']);
 			$this->setOnline($json['is_live']);
 			$this->setThumbnail($json['url_thumbnail']); //@TODO: If Azubu.tv ever supports an actual video thumbnail it should changed here.
