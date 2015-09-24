@@ -163,8 +163,9 @@ This would cause all output from the #streamer tag to reference to the "Twitch P
 
 ##Supported Streaming Services
 
-|  Service  | Parameter Value | Web Site              |
-|----------:|-----------------|-----------------------|
-| Azubu.tv  | azubu           | http://www.azubu.tv/  |
-| Beam      | beam            | http://beam.pro/      |
-| Twitch.tv | twitch          | http://www.twitch.tv/ |
+|  Service  | Parameter Value | Web Site                 |
+|----------:|-----------------|--------------------------|
+| Azubu.tv  | azubu           | http://www.azubu.tv/     |
+| Beam      | beam            | http://beam.pro/         |
+| Twitch.tv | twitch          | http://www.twitch.tv/    |
+| YouTube   | youtube         | https://www.youtube.com/ |

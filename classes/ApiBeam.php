@@ -15,7 +15,7 @@ class ApiBeam extends ApiStreamerBase {
 	 *
 	 * @var		string
 	 */
-	private $apiEntryPoint = "https://beam.pro/api/v1/";
+	protected $apiEntryPoint = "https://beam.pro/api/v1/";
 
 	/**
 	 * Main Constructor
@@ -49,7 +49,7 @@ class ApiBeam extends ApiStreamerBase {
 		/*********************/
 		/* Search            */
 		/*********************/
-		if (($json = $this->makeBeamApiRequest(['users', 'search?query='.$this->user])) === false) {
+		if (($json = $this->makeApiRequest(['users', 'search?query='.$this->user])) === false) {
 			return false;
 		}
 
@@ -70,7 +70,7 @@ class ApiBeam extends ApiStreamerBase {
 		/*********************/
 		/* User              */
 		/*********************/
-		if (($json = $this->makeBeamApiRequest(['users', $userId])) === false) {
+		if (($json = $this->makeApiRequest(['users', $userId])) === false) {
 			return false;
 		}
 
@@ -94,7 +94,7 @@ class ApiBeam extends ApiStreamerBase {
 		/*********************/
 		/* Channel           */
 		/*********************/
-		if (($json = $this->makeBeamApiRequest(['channels', $channelId])) === false) {
+		if (($json = $this->makeApiRequest(['channels', $channelId])) === false) {
 			return false;
 		}
 
@@ -110,41 +110,26 @@ class ApiBeam extends ApiStreamerBase {
 	/**
 	 * Make an API request to Beam.  Beam returns error codes inside their JSON and can be handled gracefully.
 	 *
-	 * @access	private
+	 * @access	protected
 	 * @param	array	URL bits to put between directory separators.
 	 * @return	mixed	Parsed JSON or false on error.
 	 */
-	private function makeBeamApiRequest($bits) {
-		$rawJson = Http::request('GET', $this->getFullRequestUrl($bits), $this->getRequestOptions());
+	protected function makeApiRequest($bits) {
+		$json = parent::makeApiRequest($bits);
 
-		$json = $this->parseRawJson($rawJson);
-
-		if ($json === false || isset($json['error'])) {
+		if (isset($json['error'])) {
 			return false;
 		}
 		return $json;
 	}
 
 	/**
-	 * Return an assembled URL to use for API requests.
-	 *
-	 * @access	public
-	 * @param	array	URL bits to put between directory separators.
-	 * @return	string	Full URL
-	 */
-	public function getFullRequestUrl($bits) {
-		return $this->apiEntryPoint.implode('/', $bits);
-	}
-
-
-
-	/**
 	 * Return default request options for MWHttpRequest.  Includes basics such as user agent and character encoding.
 	 *
-	 * @access	public
+	 * @access	protected
 	 * @return	array	Request Options
 	 */
-	public function getRequestOptions() {
+	protected function getRequestOptions() {
 		return array_merge(
 			parent::getRequestOptions(),
 			[

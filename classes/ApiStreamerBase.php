@@ -53,6 +53,13 @@ abstract class ApiStreamerBase {
 	private $cacheKey = null;
 
 	/**
+	 * API Entry Point
+	 *
+	 * @var		string
+	 */
+	protected $apiEntryPoint = null;
+
+	/**
 	 * Main Constructor
 	 *
 	 * @access	public
@@ -80,19 +87,6 @@ abstract class ApiStreamerBase {
 			return new $class;
 		}
 		return false;
-	}
-
-	/**
-	 * Return default request options for MWHttpRequest.  Includes basics such as user agent and character encoding.
-	 *
-	 * @access	public
-	 * @return	array	Request Options
-	 */
-	public function getRequestOptions() {
-		return [
-			'userAgent'	=> $this->userAgent,
-			'timeout'	=> 5
-		];
 	}
 
 	/**
@@ -342,6 +336,48 @@ abstract class ApiStreamerBase {
 			return false;
 		}
 		return $json;
+	}
+
+	/**
+	 * Make an API request to the service.
+	 *
+	 * @access	protected
+	 * @param	array	URL bits to put between directory separators.
+	 * @return	mixed	Parsed JSON or false on error.
+	 */
+	protected function makeApiRequest($bits) {
+		$rawJson = Http::request('GET', $this->getFullRequestUrl($bits), $this->getRequestOptions());
+
+		$json = $this->parseRawJson($rawJson);
+
+		if ($json === false) {
+			return false;
+		}
+		return $json;
+	}
+
+	/**
+	 * Return an assembled URL to use for API requests.
+	 *
+	 * @access	protected
+	 * @param	array	URL bits to put between directory separators.
+	 * @return	string	Full URL
+	 */
+	protected function getFullRequestUrl($bits) {
+		return $this->apiEntryPoint.implode('/', $bits);
+	}
+
+	/**
+	 * Return default request options for MWHttpRequest.  Includes basics such as user agent and character encoding.
+	 *
+	 * @access	protected
+	 * @return	array	Request Options
+	 */
+	protected function getRequestOptions() {
+		return [
+			'userAgent'	=> $this->userAgent,
+			'timeout'	=> 5
+		];
 	}
 
 	/**

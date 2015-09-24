@@ -15,7 +15,7 @@ class ApiTwitch extends ApiStreamerBase {
 	 *
 	 * @var		string
 	 */
-	private $apiEntryPoint = "https://api.twitch.tv/kraken/";
+	protected $apiEntryPoint = "https://api.twitch.tv/kraken/";
 
 	/**
 	 * Main Constructor
@@ -46,11 +46,7 @@ class ApiTwitch extends ApiStreamerBase {
 			return true;
 		}
 
-		$rawJson = Http::request('GET', $this->getFullRequestUrl(['channels', $this->user]), $this->getRequestOptions());
-
-		$json = $this->parseRawJson($rawJson);
-
-		if ($json === false) {
+		if (($json = $this->makeApiRequest(['channels', $this->user])) === false) {
 			return false;
 		}
 
@@ -64,10 +60,9 @@ class ApiTwitch extends ApiStreamerBase {
 			$this->setFollowers($json['followers']);
 		}
 
-		$rawJson = Http::request('GET', $this->getFullRequestUrl(['streams', $this->user]), $this->getRequestOptions());
+		$json = $this->makeApiRequest(['streams', $this->user]);
 
-		$json = $this->parseRawJson($rawJson);
-
+		//Twitch sort of pretends this end point does not exist when the user is not streaming.  So instead of returning false on a fake API error it is better to check and set the stream to be listed as offline.
 		if (array_key_exists('stream', $json) && $json['stream'] !== null) {
 			$this->setViewers($json['stream']['viewers']);
 			$this->setThumbnail($json['stream']['preview']['large']);
@@ -82,13 +77,13 @@ class ApiTwitch extends ApiStreamerBase {
 	}
 
 	/**
-	 * Return an assembled URL to use for API requests.
+	 * Return an assembled URL to use for API requests.  Twitch API end points require an extra / at the end of the URL.
 	 *
-	 * @access	public
+	 * @access	protected
 	 * @param	array	URL bits to put between directory separators.
 	 * @return	string	Full URL
 	 */
-	public function getFullRequestUrl($bits) {
-		return $this->apiEntryPoint.implode('/', $bits).'/';
+	protected function getFullRequestUrl($bits) {
+		return parent::getFullRequestUrl($bits).'/';
 	}
 }

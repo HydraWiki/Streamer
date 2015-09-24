@@ -253,4 +253,8 @@ This would cause all output from the #streamer tag to reference to the "Twitch P
 | Twitch.tv
 | twitch
 | [http://www.twitch.tv/ http://www.twitch.tv/]
+|-
+| YouTube
+| youtube
+| [https://www.youtube.com/ https://www.youtube.com/]
 |}

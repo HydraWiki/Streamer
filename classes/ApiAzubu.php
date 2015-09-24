@@ -15,7 +15,7 @@ class ApiAzubu extends ApiStreamerBase {
 	 *
 	 * @var		string
 	 */
-	private $apiEntryPoint = "http://api.azubu.tv/";
+	protected $apiEntryPoint = "http://api.azubu.tv/";
 
 	/**
 	 * Main Constructor
@@ -46,11 +46,7 @@ class ApiAzubu extends ApiStreamerBase {
 			return true;
 		}
 
-		$rawJson = Http::request('GET', $this->apiEntryPoint.'public/channel/list?channels='.$this->user, $this->getRequestOptions());
-
-		$json = $this->parseRawJson($rawJson);
-
-		if ($json === false) {
+		if (($json = $this->makeApiRequest(['public', 'channel', 'list?channels='.$userId])) === false) {
 			return false;
 		}
 
