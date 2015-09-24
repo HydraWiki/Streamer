@@ -56,7 +56,7 @@ service=[Service]
 | <code>service</code>
 | yes
 |
-| The service name to look up users on.  See **Supported Streaming Services**.
+| The service name to look up users on.  See '''Supported Streaming Services'''.
 |-
 | <code>user</code>
 | yes
@@ -192,7 +192,7 @@ service=[Service]
 | <code>service</code>
 | yes
 |
-| The service name to look up users on.  See **Supported Streaming Services**.
+| The service name to look up users on.  See '''Supported Streaming Services'''.
 |-
 | <code>user</code>
 | yes
