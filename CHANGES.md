@@ -5,6 +5,7 @@
 * Standards clean up on special pages.
 * Few miscellaneous bug fixes.
 * Added %FOLLOWERS% replacement variable.
+* Added a debug template to easily diagnose service issues and see sample data from a user.
 
 ###0.3.0
 * New #streamerinfo tag to be able to tag articles with streamer information.

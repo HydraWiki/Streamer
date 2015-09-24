@@ -34,11 +34,12 @@ class StreamerHooks {
 			'default'	=> 'block',
 			'built_in'	=> [
 				'block',
+				'debug',
+				'link',
 				'live',
 				'minilive',
 				'thumbnail',
-				'viewers',
-				'link'
+				'viewers'
 			]
 		],
 		'link' => [

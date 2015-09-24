@@ -33,12 +33,12 @@ Basic Syntax:
 
 ####Parameters for #streamer Tag
 
-|       Parameter       | Required | Default | Description                                                                                                                     |
-|----------------------:|----------|---------|---------------------------------------------------------------------------------------------------------------------------------|
-| service               | yes      |         | The service name to look up users on.  See **Supported Streaming Services**.                                                    |
-| user                  | yes      |         | The user identifier for user on the streaming service.                                                                          |
-| template              | no       | block   | **Built In**: block, live, minilive, link, viewers, thumbnail <br/>Use a built in template or specify a custom template to use. |
-| link                  | no       |         | Fully qualifed URL to override the link in templates.                                                                           |
+|       Parameter       | Required | Default | Description                                                                                                                            |
+|----------------------:|----------|---------|----------------------------------------------------------------------------------------------------------------------------------------|
+| service               | yes      |         | The service name to look up users on.  See **Supported Streaming Services**.                                                           |
+| user                  | yes      |         | The user identifier for user on the streaming service.                                                                                 |
+| template              | no       | block   | **Built In**: block, debug, link, live, minilive, thumbnail, viewers <br/>Use a built in template or specify a custom template to use. |
+| link                  | no       |         | Fully qualifed URL to override the link in templates.                                                                                  |
 
 ####Example
 
@@ -53,7 +53,7 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 
 
 ####Templates
-There are six built in templates that come with the extension; block, live, minilive, link, viewers, and thumbnail.  By default if no template is specified it uses the block template.
+There are seven built in templates that come with the extension; block, debug, link, live, minilive, thumbnail, and viewers.  By default if no template is specified it uses the block template.
 
 #####Custom
 Which template is used to display streamer information can be customized through Mediawiki's templating system.  Using the "template" parameter simply add the template page name into the parser call.  **Example: template=Template:BlockCustom**
@@ -84,6 +84,26 @@ The built in templates below are copied from the StreamerTemplate class file and
 		</div>
 	</div>
 
+######debug
+	<div class='stream debug'>
+		<ul>
+			<li>ONLINE => %ONLINE%</li>
+			<li>NAME => %NAME%</li>
+			<li>VIEWERS => %VIEWERS%</li>
+			<li>DOING => %DOING%</li>
+			<li>STATUS => %STATUS%</li>
+			<li>LIFETIME_VIEWS => %LIFETIME_VIEWS%</li>
+			<li>FOLLOWERS => %FOLLOWERS%</li>
+			<li>LOGO => %LOGO%</li>
+			<li>THUMBNAIL => %THUMBNAIL%</li>
+			<li>CHANNEL_URL => %CHANNEL_URL%</li>
+			<li>LINK => %LINK%</li>
+		</ul>
+	</div>
+
+######link
+	<div class='name'><a href='%LINK%'>%NAME%</a></div>
+
 ######live
 	<div class='stream live'>
 		<div class='stream_info'>
@@ -99,9 +119,6 @@ The built in templates below are copied from the StreamerTemplate class file and
 			<div class='online {{#ifeq:%ONLINE%|1|live|offline}}'><div class='dot'></div></div>
 		</div>
 	</div>
-
-######link
-	<div class='name'><a href='%LINK%'>%NAME%</a></div>
 
 ######viewers
 	<div class='stream viewers'>

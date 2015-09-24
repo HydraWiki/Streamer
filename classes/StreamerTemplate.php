@@ -134,4 +134,31 @@ class StreamerTemplate {
 
 		return $html;
 	}
+
+	/**
+	 * Built In 'debug' template.
+	 *
+	 * @access	public
+	 * @return	string	HTML
+	 */
+	static public function _debug() {
+		$html = "
+			<div class='stream debug'>
+				<ul>
+					<li>ONLINE => %ONLINE%</li>
+					<li>NAME => %NAME%</li>
+					<li>VIEWERS => %VIEWERS%</li>
+					<li>DOING => %DOING%</li>
+					<li>STATUS => %STATUS%</li>
+					<li>LIFETIME_VIEWS => %LIFETIME_VIEWS%</li>
+					<li>FOLLOWERS => %FOLLOWERS%</li>
+					<li>LOGO => %LOGO%</li>
+					<li>THUMBNAIL => %THUMBNAIL%</li>
+					<li>CHANNEL_URL => %CHANNEL_URL%</li>
+					<li>LINK => %LINK%</li>
+				</ul>
+			</div>";
+
+		return $html;
+	}
 }
