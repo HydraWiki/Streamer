@@ -22,6 +22,7 @@ class StreamerHooks {
 			'values'	=> [
 				'azubu',
 				'beam',
+				'hitbox',
 				'twitch',
 				'youtube'
 			]

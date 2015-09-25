@@ -46,7 +46,7 @@ class ApiAzubu extends ApiStreamerBase {
 			return true;
 		}
 
-		if (($json = $this->makeApiRequest(['public', 'channel', 'list?channels='.$userId])) === false) {
+		if (($json = $this->makeApiRequest(['public', 'channel', 'list?channels='.$this->user])) === false) {
 			return false;
 		}
 
