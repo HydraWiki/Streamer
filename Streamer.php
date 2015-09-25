@@ -44,11 +44,11 @@ $wgExtensionMessagesFiles['StreamerMagic']		= "{$extDir}/Streamer.i18n.magic.php
 $wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
 
 $wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
-$wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/ApiStreamerBase.php";
-$wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/ApiAzubu.php";
-$wgAutoloadClasses['ApiBeam']					= "{$extDir}/classes/ApiBeam.php";
-$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/ApiTwitch.php";
-$wgAutoloadClasses['ApiYoutube']					= "{$extDir}/classes/ApiYoutube.php";
+$wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/api/ApiStreamerBase.php";
+$wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/api/ApiAzubu.php";
+$wgAutoloadClasses['ApiBeam']					= "{$extDir}/classes/api/ApiBeam.php";
+$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/api/ApiTwitch.php";
+$wgAutoloadClasses['ApiYoutube']				= "{$extDir}/classes/api/ApiYoutube.php";
 $wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
 $wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
 $wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
