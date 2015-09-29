@@ -50,8 +50,8 @@ Basic Syntax:
 
 <pre><nowiki>
 {{#streamer:
-service=[Service]
-|user=[User]
+service=[service]
+|user=[user]
 }}
 </nowiki></pre>
 
@@ -92,7 +92,7 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 
 <pre><nowiki>
 {{#streamer:
-service=Twitch
+service=twitch
 |user=twitchplayspokemon
 }}
 </nowiki></pre>
@@ -204,8 +204,8 @@ Basic Syntax:
 
 <pre><nowiki>
 {{#streamerinfo:
-service=[Service]
-|user=[User]
+service=[service]
+|user=[user]
 }}
 </nowiki></pre>
 
@@ -237,7 +237,7 @@ To tag the article "Twitch Plays Pokemon" with the Twitch user "twitchplayspokem
 
 <pre><nowiki>
 {{#streamerinfo:
-service=Twitch
+service=twitch
 |user=twitchplayspokemon
 }}
 </nowiki></pre>

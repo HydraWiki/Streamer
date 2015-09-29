@@ -35,8 +35,8 @@ The #streamer parser tag takes what service is being used, who the user is, and 
 Basic Syntax:
 
 	{{#streamer:
-	service=[Service]
-	|user=[User]
+	service=[service]
+	|user=[user]
 	}}
 
 ####Parameters for #streamer Tag
@@ -53,7 +53,7 @@ Basic Syntax:
 To display the default block template for TwitchPlaysPokemon from the Twitch streaming service:
 
 	{{#streamer:
-	service=Twitch
+	service=twitch
 	|user=twitchplayspokemon
 	}}
 
@@ -147,8 +147,8 @@ The #streamerinfo parser meta tag takes what service is being used and who the u
 Basic Syntax:
 
 	{{#streamerinfo:
-	service=[Service]
-	|user=[User]
+	service=[service]
+	|user=[user]
 	}}
 
 ####Parameters for #streamerinfo Tag
@@ -163,7 +163,7 @@ Basic Syntax:
 To tag the article "Twitch Plays Pokemon" with the Twitch user "twitchplayspokemon":
 
 	{{#streamerinfo:
-	service=Twitch
+	service=twitch
 	|user=twitchplayspokemon
 	}}
 
