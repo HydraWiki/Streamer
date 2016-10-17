@@ -42,9 +42,9 @@ class ApiTwitch extends ApiStreamerBase {
 		}
 		$this->user = $user;
 
-		//if ($this->loadCache()) {
-	//		return true;
-	//	}
+		if ($this->loadCache()) {
+			return true;
+		}
 
 		$channel = $this->makeApiRequest(['channels', $this->user]);
 		if ($channel === false) {
