@@ -42,9 +42,9 @@ class ApiTwitch extends ApiStreamerBase {
 		}
 		$this->user = $user;
 
-		if ($this->loadCache()) {
-			return true;
-		}
+		//if ($this->loadCache()) {
+	//		return true;
+	//	}
 
 		$channel = $this->makeApiRequest(['channels', $this->user]);
 		if ($channel === false) {
@@ -61,12 +61,12 @@ class ApiTwitch extends ApiStreamerBase {
 			$this->setFollowers($channel['followers']);
 		}
 
-		$steam = $this->makeApiRequest(['streams', $this->user]);
+		$stream = $this->makeApiRequest(['streams', $this->user]);
 
 		//Twitch sort of pretends this end point does not exist when the user is not streaming.  So instead of returning false on a fake API error it is better to check and set the stream to be listed as offline.
 		if (array_key_exists('stream', $stream) && $stream['stream'] !== null) {
 			$this->setViewers($stream['stream']['viewers']);
-			$this->setThumbnail($stream['stream']['preview']['large']);
+			$this->setThumbnail($stream['stream']['preview']);
 			$this->setOnline(true);
 		} else {
 			$this->setOnline(false);
