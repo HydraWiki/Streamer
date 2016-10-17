@@ -5,7 +5,7 @@
 |type        = parser function
 |author      = Curse Inc. Wiki Platform Team, Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]])
 |version     = 0.4.1
-|update      = 2015-09-24
+|update      = 2016-10-17
 |mediawiki   = 1.23+
 |php         = 5.4+
 |download    = {{ {{TNTN|GithubDownload}} |CurseStaff|Streamer}}
@@ -26,10 +26,10 @@ The '''Streamer''' extension displays information about streamers from various s
 
 =Installation=
 
-{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/CurseStaff/Streamer/archive/v0.4.0.zip Download]}}
+{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/HydraWiki/Streamer/archive/v0.4.1.zip Download]}}
 
 == Configuration ==
-Streamer only requires configuration if the YouTube service will be used.
+Streamer only requires configuration if the YouTube or Twitch service will be used.
 
 {|class = "wikitable"
 !Setting
