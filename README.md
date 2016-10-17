@@ -23,6 +23,7 @@ Streamer only requires configuration if the YouTube service will be used.
 |          Setting         | Default | Description                                                                                                                                              |
 |:-------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | $wgYouTubeApiKey         | null    | Accessing the YouTube API requires [registering with Google and obtaining an API key](https://developers.google.com/youtube/registering_an_application). |
+| $wgTwitchClientId        | null    | Accessing the Twitch API requires [registering with Twitch and obtaining a Client ID](https://www.twitch.tv/kraken/oauth2/clients/new).                  |
 
 
 #Usage
@@ -35,8 +36,8 @@ The #streamer parser tag takes what service is being used, who the user is, and 
 Basic Syntax:
 
 	{{#streamer:
-	service=[service]
-	|user=[user]
+	service=[Service]
+	|user=[User]
 	}}
 
 ####Parameters for #streamer Tag
@@ -53,7 +54,7 @@ Basic Syntax:
 To display the default block template for TwitchPlaysPokemon from the Twitch streaming service:
 
 	{{#streamer:
-	service=twitch
+	service=Twitch
 	|user=twitchplayspokemon
 	}}
 
@@ -147,8 +148,8 @@ The #streamerinfo parser meta tag takes what service is being used and who the u
 Basic Syntax:
 
 	{{#streamerinfo:
-	service=[service]
-	|user=[user]
+	service=[Service]
+	|user=[User]
 	}}
 
 ####Parameters for #streamerinfo Tag
@@ -163,7 +164,7 @@ Basic Syntax:
 To tag the article "Twitch Plays Pokemon" with the Twitch user "twitchplayspokemon":
 
 	{{#streamerinfo:
-	service=twitch
+	service=Twitch
 	|user=twitchplayspokemon
 	}}
 

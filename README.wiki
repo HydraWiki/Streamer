@@ -4,8 +4,8 @@
 |status      = beta
 |type        = parser function
 |author      = Curse Inc. Wiki Platform Team, Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]])
-|version     = 0.4.0
-|update      = 2015-09-29
+|version     = 0.4.1
+|update      = 2015-09-24
 |mediawiki   = 1.23+
 |php         = 5.4+
 |download    = {{ {{TNTN|GithubDownload}} |CurseStaff|Streamer}}
@@ -36,7 +36,9 @@ Streamer only requires configuration if the YouTube service will be used.
 !Default
 !Description
 |-
-|<code>$wgYouTubeApiKey || <code>null</code> || Accessing the YouTube API requires [https://developers.google.com/youtube/registering_an_application registering with Google and obtaining an API key].
+|<code>$wgYouTubeApiKey</code> || <code>null</code> || Accessing the YouTube API requires [https://developers.google.com/youtube/registering_an_application registering with Google and obtaining an API key].
+|-
+|<code>$wgTwitchClientId</code> || <code>null</code> || Accessing the Twitch API requires [https://www.twitch.tv/kraken/oauth2/clients/new registering with Twitch and obtaining a Client ID].
 |}
 
 =Usage=
@@ -50,8 +52,8 @@ Basic Syntax:
 
 <pre><nowiki>
 {{#streamer:
-service=[service]
-|user=[user]
+service=[Service]
+|user=[User]
 }}
 </nowiki></pre>
 
@@ -72,7 +74,7 @@ service=[service]
 | <code>user</code>
 | yes
 |
-| The user identifier for user on the streaming service. 
+| The user identifier for user on the streaming service.
 |-
 | <code>template</code>
 | no
@@ -92,7 +94,7 @@ To display the default block template for TwitchPlaysPokemon from the Twitch str
 
 <pre><nowiki>
 {{#streamer:
-service=twitch
+service=Twitch
 |user=twitchplayspokemon
 }}
 </nowiki></pre>
@@ -204,8 +206,8 @@ Basic Syntax:
 
 <pre><nowiki>
 {{#streamerinfo:
-service=[service]
-|user=[user]
+service=[Service]
+|user=[User]
 }}
 </nowiki></pre>
 
@@ -227,7 +229,7 @@ service=[service]
 | <code>user</code>
 | yes
 |
-| The user identifier for user on the streaming service. 
+| The user identifier for user on the streaming service.
 |}
 
 
@@ -237,7 +239,7 @@ To tag the article "Twitch Plays Pokemon" with the Twitch user "twitchplayspokem
 
 <pre><nowiki>
 {{#streamerinfo:
-service=twitch
+service=Twitch
 |user=twitchplayspokemon
 }}
 </nowiki></pre>

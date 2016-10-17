@@ -46,26 +46,27 @@ class ApiTwitch extends ApiStreamerBase {
 			return true;
 		}
 
-		if (($json = $this->makeApiRequest(['channels', $this->user])) === false) {
+		$channel = $this->makeApiRequest(['channels', $this->user]);
+		if ($channel === false) {
 			return false;
 		}
 
-		if (isset($json['display_name'])) {
-			$this->setName($json['display_name']);
-			$this->setLogo($json['logo']);
-			$this->setDoing($json['game']);
-			$this->setLifetimeViews($json['views']);
-			$this->setChannelUrl($json['url']);
-			$this->setStatus($json['status']);
-			$this->setFollowers($json['followers']);
+		if (isset($channel['display_name'])) {
+			$this->setName($channel['display_name']);
+			$this->setLogo($channel['logo']);
+			$this->setDoing($channel['game']);
+			$this->setLifetimeViews($channel['views']);
+			$this->setChannelUrl($channel['url']);
+			$this->setStatus($channel['status']);
+			$this->setFollowers($channel['followers']);
 		}
 
-		$json = $this->makeApiRequest(['streams', $this->user]);
+		$steam = $this->makeApiRequest(['streams', $this->user]);
 
 		//Twitch sort of pretends this end point does not exist when the user is not streaming.  So instead of returning false on a fake API error it is better to check and set the stream to be listed as offline.
-		if (array_key_exists('stream', $json) && $json['stream'] !== null) {
-			$this->setViewers($json['stream']['viewers']);
-			$this->setThumbnail($json['stream']['preview']['large']);
+		if (array_key_exists('stream', $stream) && $stream['stream'] !== null) {
+			$this->setViewers($stream['stream']['viewers']);
+			$this->setThumbnail($stream['stream']['preview']['large']);
 			$this->setOnline(true);
 		} else {
 			$this->setOnline(false);
@@ -84,6 +85,8 @@ class ApiTwitch extends ApiStreamerBase {
 	 * @return	string	Full URL
 	 */
 	protected function getFullRequestUrl($bits) {
-		return parent::getFullRequestUrl($bits).'/';
+		global $wgTwitchClientId;
+
+		return parent::getFullRequestUrl($bits)."/?api_version=2&client_id={$wgTwitchClientId}";
 	}
 }

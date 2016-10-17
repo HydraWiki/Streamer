@@ -1,8 +1,10 @@
 ##Patch Notes
+###0.4.1
+* Adding Twitch.tv `client_id` configuration.
+
 ###0.4.0
 * Support for Azubu.tv.
 * Support for Beam.
-* Support for Hitbox.tv.
 * Support for YouTube.
 * Standards clean up on special pages.
 * Few miscellaneous bug fixes.

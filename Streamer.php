@@ -16,7 +16,7 @@ if (!defined('MEDIAWIKI')) {
 /******************************************/
 /* Credits                                */
 /******************************************/
-define('STREAMER_VERSION', '0.4.0');
+define('STREAMER_VERSION', '0.4.1');
 
 $wgExtensionCredits['parserhook'][] = [
 	'path'				=> __FILE__,
@@ -31,10 +31,7 @@ $wgExtensionCredits['parserhook'][] = [
 /* Language Strings, Page Aliases, Hooks  */
 /******************************************/
 $extDir = __DIR__;
-
-if (!defined('STREAMER_EXT_DIR')) {
-	define('STREAMER_EXT_DIR', $extDir);
-}
+define('STREAMER_EXT_DIR', $extDir);
 
 $wgAvailableRights[] = 'edit_streamer_info';
 $wgGroupPermissions['sysop']['edit_streamer_info'] = true;
@@ -69,3 +66,4 @@ $wgResourceModules['ext.streamer'] = [
 ];
 
 $wgYouTubeApiKey = null;
+$wgTwitchClientId = null;

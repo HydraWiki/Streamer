@@ -101,7 +101,6 @@ class StreamerHooks {
 			$streamer = ApiStreamerBase::newFromService($parameters['service']);
 			if ($streamer !== false) {
 				$userGood = $streamer->setUser($parameters['user']);
-
 				if (!$userGood) {
 					self::setError('streamer_error_invalid_user', [$parameters['service'], $parameters['user']]);
 				} else {
