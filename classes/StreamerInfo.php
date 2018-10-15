@@ -185,7 +185,7 @@ class StreamerInfo {
 		$streamerId = $this->data['streamer_id'];
 		unset($this->data['streamer_id']);
 
-		$this->DB->begin();
+		$this->DB->startAtomic(__METHOD__);
 		if ($streamerId > 0) {
 			$result = $this->DB->update(
 				'streamer',
@@ -201,12 +201,14 @@ class StreamerInfo {
 			);
 			$streamerId = $this->DB->insertId();
 		}
-		if ($result !== false) {
+
+		if (!$result) {
+			$this->DB->cancelAtomic(__METHOD__);
+		} else {
 			$success = true;
 		}
-		$this->DB->commit();
-
 		$this->data['streamer_id'] = $streamerId;
+		$this->DB->endAtomic(__METHOD__);
 
 		return $success;
 	}
