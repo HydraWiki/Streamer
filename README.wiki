@@ -1,14 +1,14 @@
-{{ {{TNTN|Extension}}
+{{TNT|Extension
 |name        = Streamer
-|license     = {{EL|LGPL3}}
+|license     = LGPL-3.0
 |status      = beta
 |type        = parser function
 |author      = Curse Inc. Wiki Platform Team, Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]])
-|version     = 0.4.1
-|update      = 2016-10-17
-|mediawiki   = 1.23+
-|php         = 5.4+
-|download    = {{ {{TNTN|GithubDownload}} |CurseStaff|Streamer}}
+|version     = 0.5.0
+|update      = 2018-10-15
+|mediawiki   = 1.31+
+|php         = 7.0+
+|download    = {{TNT|GithubDownload|HydraWiki|Streamer}}
 |hook1       = ParserFirstCallInit
 |hook2       = LoadExtensionSchemaUpdates
 |description = Display information about a streamer from various streaming services.
@@ -23,10 +23,12 @@ The '''Streamer''' extension displays information about streamers from various s
 ;Bug Reports and Feature Requests: [https://github.com/CurseStaff/Streamer/issues Issue Tracker at Github]
 ;Licensing: Streamer is released under [http://opensource.org/licenses/lgpl-3.0.html The GNU Lesser General Public License, version 3.0].
 
+== Installation ==
 
-=Installation=
-
-{{ {{TNTN|ExtensionInstall}} |download-link=[https://github.com/HydraWiki/Streamer/archive/v0.4.1.zip Download]}}
+{{TNT|ExtensionInstall
+|download-link=[https://github.com/HydraWiki/Streamer/archive/v0.5.0.zip Download, extract]
+|custom-steps=* [[#Configuration|Configure as required.]]
+}}
 
 == Configuration ==
 Streamer only requires configuration if the YouTube or Twitch service will be used.

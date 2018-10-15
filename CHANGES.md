@@ -1,4 +1,7 @@
 ##Patch Notes
+###0.5.0
+* Updated to newer database atomic section API.  This requires MediaWiki 1.31 or higher.
+
 ###0.4.1
 * Adding Twitch.tv `client_id` configuration.
 
