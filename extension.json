@@ -1,6 +1,6 @@
 {
 	"name": "Streamer",
-	"version": "0.4.1",
+	"version": "0.5.0",
 	"author": [
 		"Wiki Platform Team",
 		"Curse Inc.",
@@ -9,6 +9,9 @@
 	"url": "http://www.mediawiki.org/wiki/Extension:Streamer",
 	"descriptionmsg": "streamer_description",
 	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
 	"AvailableRights": [
 		"edit_streamer_info"
 	],
