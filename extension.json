@@ -1,0 +1,76 @@
+{
+	"name": "Streamer",
+	"version": "0.4.1",
+	"author": [
+		"Wiki Platform Team",
+		"Curse Inc.",
+		"Alexia E. Smith"
+	],
+	"url": "http://www.mediawiki.org/wiki/Extension:Streamer",
+	"descriptionmsg": "streamer_description",
+	"type": "parserhook",
+	"AvailableRights": [
+		"edit_streamer_info"
+	],
+	"GroupPermissions": {
+		"sysop": {
+			"edit_streamer_info": true
+		}
+	},
+	"SpecialPages": {
+		"StreamerInfo": "SpecialStreamerInfo"
+	},
+	"MessagesDirs": {
+		"Streamer": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"StreamerMagic": "Streamer.i18n.magic.php"
+	},
+	"AutoloadClasses": {
+		"StreamerHooks": "Streamer.hooks.php",
+		"ApiStreamerBase": "classes/api/ApiStreamerBase.php",
+		"ApiAzubu": "classes/api/ApiAzubu.php",
+		"ApiBeam": "classes/api/ApiBeam.php",
+		"ApiHitbox": "classes/api/ApiHitbox.php",
+		"ApiTwitch": "classes/api/ApiTwitch.php",
+		"ApiYoutube": "classes/api/ApiYoutube.php",
+		"StreamerTemplate": "classes/StreamerTemplate.php",
+		"StreamerInfo": "classes/StreamerInfo.php",
+		"SpecialStreamerInfo": "specials/SpecialStreamerInfo.php",
+		"TemplateStreamerInfo": "templates/TemplateStreamerInfo.php"
+	},
+	"ResourceModules": {
+		"ext.streamer": {
+			"styles": [
+				"css/streamer.css"
+			],
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "Streamer"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "StreamerHooks::onParserFirstCallInit",
+		"PageContentSaveComplete": "StreamerHooks::onPageContentSaveComplete",
+		"LoadExtensionSchemaUpdates": "StreamerHooks::onLoadExtensionSchemaUpdates"
+	},
+	"config": {
+		"YouTubeApiKey": {
+			"value": null,
+			"path": false,
+			"descriptionmsg": "streamer-config-youtubeapikey",
+			"public": false
+		},
+		"TwitchClientId": {
+			"value": null,
+			"path": false,
+			"descriptionmsg": "streamer-config-twitchclientid",
+			"public": false
+		}
+	},
+	"manifest_version": 2
+}

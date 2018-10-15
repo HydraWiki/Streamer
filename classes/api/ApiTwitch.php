@@ -64,7 +64,7 @@ class ApiTwitch extends ApiStreamerBase {
 		$stream = $this->makeApiRequest(['streams', $this->user]);
 
 		//Twitch sort of pretends this end point does not exist when the user is not streaming.  So instead of returning false on a fake API error it is better to check and set the stream to be listed as offline.
-		if (array_key_exists('stream', $stream) && $stream['stream'] !== null) {
+		if (is_array($stream) && array_key_exists('stream', $stream) && $stream['stream'] !== null) {
 			$this->setViewers($stream['stream']['viewers']);
 			$this->setThumbnail($stream['stream']['preview']);
 			$this->setOnline(true);
@@ -87,6 +87,6 @@ class ApiTwitch extends ApiStreamerBase {
 	protected function getFullRequestUrl($bits) {
 		global $wgTwitchClientId;
 
-		return parent::getFullRequestUrl($bits)."/?api_version=2&client_id={$wgTwitchClientId}";
+		return parent::getFullRequestUrl($bits)."/?client_id={$wgTwitchClientId}";
 	}
 }

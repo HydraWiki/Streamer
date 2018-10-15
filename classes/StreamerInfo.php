@@ -222,7 +222,7 @@ class StreamerInfo {
 
 		$streamerId = $this->getId();
 
-		$this->DB->begin();
+		$this->DB->startAtomic(__METHOD__);
 		if ($streamerId > 0) {
 			$result = $this->DB->delete(
 				'streamer',
@@ -233,11 +233,11 @@ class StreamerInfo {
 
 		if ($result !== false) {
 			$success = true;
-			$this->DB->commit();
 			unset($this->data['streamer_id']);
 		} else {
-			$this->DB->rollback();
+			$this->DB->cancelAtomic(__METHOD__);
 		}
+		$this->DB->endAtomic(__METHOD__);
 
 		return $success;
 	}

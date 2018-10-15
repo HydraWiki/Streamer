@@ -65,6 +65,8 @@ class StreamerHooks {
      * @return	boolean	true
      */
     static public function onParserFirstCallInit(Parser &$parser) {
+		define('STREAMER_VERSION', '0.5.0');
+
 		$parser->setFunctionHook("streamer", "StreamerHooks::parseStreamerTag", SFH_OBJECT_ARGS);
 		$parser->setFunctionHook("streamerinfo", "StreamerHooks::parseStreamerInfoTag", SFH_OBJECT_ARGS);
 
@@ -367,7 +369,8 @@ class StreamerHooks {
 	 * @return	boolean	true
 	 */
 	static public function onLoadExtensionSchemaUpdates($updater = null) {
-		$updater->addExtensionUpdate(['addTable', 'streamer', STREAMER_EXT_DIR."/install/sql/streamer_table_streamer.sql", true]);
+		$extDir = __DIR__;
+		$updater->addExtensionUpdate(['addTable', 'streamer', "{$extDir}/install/sql/streamer_table_streamer.sql", true]);
 
 		return true;
 	}

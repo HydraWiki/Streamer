@@ -9,61 +9,15 @@
  *
  **/
 
-if (!defined('MEDIAWIKI')) {
-	exit;
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'Streamer' );
+	// Keep i18n globals so mergeMessageFileList.php doesn't break
+	$wgMessagesDirs['Streamer'] = __DIR__ . '/i18n';
+	wfWarn(
+		'Deprecated PHP entry point used for Streamer extension. Please use wfLoadExtension instead, ' .
+		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	);
+	return;
+ } else {
+	die( 'This version of the Streamer extension requires MediaWiki 1.25+' );
 }
-
-/******************************************/
-/* Credits                                */
-/******************************************/
-define('STREAMER_VERSION', '0.4.1');
-
-$wgExtensionCredits['parserhook'][] = [
-	'path'				=> __FILE__,
-	'name'				=> 'Streamer',
-	'author'			=> ['Wiki Platform Team', 'Curse Inc.', 'Alexia E. Smith'],
-	'url'				=> 'http://www.mediawiki.org/wiki/Extension:Streamer',
-	'version'			=> STREAMER_VERSION,
-	'descriptionmsg'	=> 'streamer_description'
-];
-
-/******************************************/
-/* Language Strings, Page Aliases, Hooks  */
-/******************************************/
-$extDir = __DIR__;
-define('STREAMER_EXT_DIR', $extDir);
-
-$wgAvailableRights[] = 'edit_streamer_info';
-$wgGroupPermissions['sysop']['edit_streamer_info'] = true;
-
-$wgExtensionMessagesFiles['Streamer']			= "{$extDir}/Streamer.i18n.php";
-$wgExtensionMessagesFiles['StreamerMagic']		= "{$extDir}/Streamer.i18n.magic.php";
-$wgMessagesDirs['Streamer']						= "{$extDir}/i18n";
-
-$wgAutoloadClasses['StreamerHooks']				= "{$extDir}/Streamer.hooks.php";
-$wgAutoloadClasses['ApiStreamerBase']			= "{$extDir}/classes/api/ApiStreamerBase.php";
-$wgAutoloadClasses['ApiAzubu']					= "{$extDir}/classes/api/ApiAzubu.php";
-$wgAutoloadClasses['ApiBeam']					= "{$extDir}/classes/api/ApiBeam.php";
-$wgAutoloadClasses['ApiHitbox']					= "{$extDir}/classes/api/ApiHitbox.php";
-$wgAutoloadClasses['ApiTwitch']					= "{$extDir}/classes/api/ApiTwitch.php";
-$wgAutoloadClasses['ApiYoutube']				= "{$extDir}/classes/api/ApiYoutube.php";
-$wgAutoloadClasses['StreamerTemplate']			= "{$extDir}/classes/StreamerTemplate.php";
-$wgAutoloadClasses['StreamerInfo']				= "{$extDir}/classes/StreamerInfo.php";
-$wgAutoloadClasses['SpecialStreamerInfo']		= "{$extDir}/specials/SpecialStreamerInfo.php";
-$wgAutoloadClasses['TemplateStreamerInfo']		= "{$extDir}/templates/TemplateStreamerInfo.php";
-
-$wgSpecialPages['StreamerInfo']					= 'SpecialStreamerInfo';
-
-$wgHooks['ParserFirstCallInit'][]				= 'StreamerHooks::onParserFirstCallInit';
-$wgHooks['PageContentSaveComplete'][]			= 'StreamerHooks::onPageContentSaveComplete';
-$wgHooks['LoadExtensionSchemaUpdates'][]		= 'StreamerHooks::onLoadExtensionSchemaUpdates';
-
-$wgResourceModules['ext.streamer'] = [
-	'localBasePath'	=> __DIR__,
-	'remoteExtPath'	=> 'Streamer',
-	'styles'		=> ['css/streamer.css'],
-	'position'		=> 'top'
-];
-
-$wgYouTubeApiKey = null;
-$wgTwitchClientId = null;
