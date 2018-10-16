@@ -206,9 +206,9 @@ class StreamerInfo {
 			$this->DB->cancelAtomic(__METHOD__);
 		} else {
 			$success = true;
+			$this->DB->endAtomic(__METHOD__);
 		}
 		$this->data['streamer_id'] = $streamerId;
-		$this->DB->endAtomic(__METHOD__);
 
 		return $success;
 	}
@@ -236,10 +236,10 @@ class StreamerInfo {
 		if ($result !== false) {
 			$success = true;
 			unset($this->data['streamer_id']);
+			$this->DB->endAtomic(__METHOD__);
 		} else {
 			$this->DB->cancelAtomic(__METHOD__);
 		}
-		$this->DB->endAtomic(__METHOD__);
 
 		return $success;
 	}
